@@ -5,8 +5,135 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CakeShopWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowState="Maximized"
+        Title="Cake Shop" Height="700" Width="900">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" 
+              HorizontalAlignment="Left"
+              Background="#FF222222" Width="200" >
+            <materialDesign:TransitioningContent 
+                x:Name="TransitionCursor" 
+                OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
+                <Grid x:Name="MenuPointer"
+                      Width="5" Height="60" 
+                      HorizontalAlignment="Left" 
+                      VerticalAlignment="Top"
+                      Margin="0,100,0,0" 
+                      Background="#FF0069C0">
+                </Grid>
+            </materialDesign:TransitioningContent>
+
+            <ListView x:Name="ListViewMenu" 
+                      Margin="0,100,0,35" 
+                      Width="200"
+                      Foreground="LightGray"
+                      FontSize="18" 
+                      FontFamily="Segoe UI"
+                      SelectedIndex="0">
+
+                <ListViewItem Height="60" Width="200" Padding="0" Margin="0">
+                    <Button Padding="10,0,0,0" 
+                            FontSize="17"
+                            Background="{x:Null}" 
+                            BorderBrush="{x:Null}"
+                            Width="198" Height="60" 
+                            Name="Home"
+                            Click="Home_Click"
+                            >
+                        <StackPanel Orientation="Horizontal" Width="184" Height="60">
+                            <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="Trang chủ" FontSize="17" VerticalAlignment="Center" Margin="5 0"/>
+                        </StackPanel>
+                    </Button>
+                </ListViewItem>
+
+                <ListViewItem Height="60" Padding="0" Width="200">
+                    <Button Padding="10,0,0,0" FontSize="17"
+                            Background="{x:Null}" 
+                            BorderBrush="{x:Null}" 
+                            Width="198" Height="60" 
+                            Name="AddProduct"
+                            Click="AddProduct_Click"
+                            >
+                        <StackPanel Orientation="Horizontal" Width="184" Height="60">
+                            <materialDesign:PackIcon Kind="PeopleAdd" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="Thêm sản phẩm" FontSize="17" VerticalAlignment="Center" Margin="5 0"/>
+                        </StackPanel>
+                    </Button>
+                </ListViewItem>
+
+                <ListViewItem Padding="0" Height="60" Width="200">
+                    <Button Padding="10,0,0,0" FontSize="17"
+                            Background="{x:Null}" 
+                            BorderBrush="{x:Null}" 
+                            Width="198" Height="60"
+                            Name="CreateOrder"
+                            Click="CreateOrder_Click"
+                            >
+                        <StackPanel Orientation="Horizontal" Height="58" Width="184">
+                            <materialDesign:PackIcon Kind="AddLocation" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="Tạo đơn hàng" FontSize="17" VerticalAlignment="Center" Margin="5 0"/>
+                        </StackPanel>
+                    </Button>
+                </ListViewItem>
+                <ListViewItem Padding="0" Height="60">
+                    <Button Padding="10,0,0,0" FontSize="17"
+                            Background="{x:Null}" 
+                            BorderBrush="{x:Null}" 
+                            Width="200" 
+                            Height="60"
+                            Name="Statistics"
+                            Click="Statistics_Click">
+                        <StackPanel Orientation="Horizontal" Height="57" Width="184">
+                            <materialDesign:PackIcon Kind="AddThick" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="Thống kê" FontSize="17" VerticalAlignment="Center" Margin="5 0"/>
+                        </StackPanel>
+                    </Button>
+
+                </ListViewItem>
+                <ListViewItem Padding="0,0,0,0" Height="60">
+                    <Button Padding="10,0,0,0" FontSize="17"
+                            Background="{x:Null}" 
+                            BorderBrush="{x:Null}" 
+                            Width="200" 
+                            Height="60"
+                            Name="About"
+                            Click="About_Click">
+                        <StackPanel Orientation="Horizontal" Width="184" Height="60">
+                            <materialDesign:PackIcon Kind="About" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="Thông tin" FontSize="17" VerticalAlignment="Center" Margin="5 0"/>
+                        </StackPanel>
+                    </Button>
+
+                </ListViewItem>
+                <ListViewItem Padding="0,0,0,0" Height="60">
+                    <Button Padding="10,0,0,0" FontSize="17"
+                            Background="{x:Null}" 
+                            BorderBrush="{x:Null}" 
+                            Width="198" 
+                            Height="60"
+                            Name="Setting"
+                            Click="Setting_Click">
+                        <StackPanel Orientation="Horizontal" Width="184" Height="60">
+                            <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="Cài đặt" FontSize="17" VerticalAlignment="Center" Margin="5 0"/>
+                        </StackPanel>
+                    </Button>
+
+                </ListViewItem>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>

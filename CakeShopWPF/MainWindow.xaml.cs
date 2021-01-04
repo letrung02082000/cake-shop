@@ -23,6 +23,48 @@ namespace CakeShopWPF
         public MainWindow()
         {
             InitializeComponent();
+            
+        }
+
+        private void ChangeMenuPointer(int index)
+        {
+            TransitionCursor.OnApplyTemplate();
+            MenuPointer.Margin = new Thickness(0, 100 + 60 * index, 0, 0);
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Statistics_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Setting_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
