@@ -14,6 +14,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowState="Maximized"
+        Loaded="Window_Loaded"
         Title="Cake Shop" Height="700" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -134,6 +135,9 @@
 
                 </ListViewItem>
             </ListView>
+        </Grid>
+        <Grid Grid.Column="1" x:Name="GridContent">
+            
         </Grid>
     </Grid>
 </Window>

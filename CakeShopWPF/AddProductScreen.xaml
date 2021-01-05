@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="CakeShopWPF.AddProductScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CakeShopWPF"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             Loaded="AddProductScreen_Loaded"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="68*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel>
+                <Label>Thêm sản phẩm mới</Label>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="241*"/>
+                <ColumnDefinition Width="321*"/>
+                <ColumnDefinition Width="238*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top">Tên sản phẩm</TextBlock>
+                    <TextBox x:Name="tbName"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top">Mã sản phẩm</TextBlock>
+                    <TextBox x:Name="tbCode"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top">Giá sản phẩm</TextBlock>
+                    <TextBox x:Name="tbPrice"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top">Mô tả</TextBlock>
+                    <TextBox x:Name="tbDesc"/>
+                </DockPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top">Loại sản phẩm</TextBlock>
+                    <TextBox x:Name="tbCategory"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top">Ảnh sản phẩm</TextBlock>
+                    <Image x:Name="productImage"/>
+                </DockPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top">Ngày nhập kho</TextBlock>
+                    <TextBox x:Name="tbDate"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top">Số lượng nhập</TextBlock>
+                    <TextBox x:Name="tbQuantity"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top">Tổng tiền nhập hàng</TextBlock>
+                    <TextBox x:Name="tbTotal"/>
+                </DockPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Margin="10" x:Name="addProductBtn" Click="addProductBtn_Click">Thêm</Button>
+                    <Button>Huỷ bỏ</Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
