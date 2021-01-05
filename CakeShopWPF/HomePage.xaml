@@ -57,7 +57,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding CakePrice}"></TextBlock>
                                 <TextBlock Text=" đồng"/>
-                                <Button>Thêm vào đơn hàng</Button>
+                                <Button x:Name="addToCartBtn" Click="addToCartBtn_Click">Thêm vào đơn hàng</Button>
                             </StackPanel>
                             <Label Content="{Binding CakeName}" HorizontalAlignment="Center" Margin="0,0,0,0">
                             </Label>

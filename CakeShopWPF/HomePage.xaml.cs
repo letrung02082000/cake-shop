@@ -56,5 +56,21 @@ namespace CakeShopWPF
             DetailProductPage detailProductPage = new DetailProductPage(cakeId);
             this.NavigationService.Navigate(detailProductPage);
         }
+
+        private void addToCartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var index = CakeListView.Items.IndexOf((sender as FrameworkElement).DataContext);
+
+            foreach (var cartCake in Cart.CartList)
+            {
+                if (cartCake == CakeList[index])
+                {
+                    MessageBox.Show("San pham da duoc them vao don hang");
+                    return;
+                }
+            }
+
+            Cart.CartList.Add(CakeList[index]);
+        }
     }
 }

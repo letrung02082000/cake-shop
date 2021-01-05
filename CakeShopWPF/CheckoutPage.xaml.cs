@@ -1,5 +1,4 @@
-﻿using ModelLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,22 +16,18 @@ using System.Windows.Shapes;
 namespace CakeShopWPF
 {
     /// <summary>
-    /// Interaction logic for DetailProductPage.xaml
+    /// Interaction logic for CheckoutPage.xaml
     /// </summary>
-    public partial class DetailProductPage : Page
+    public partial class CheckoutPage : Page
     {
-        public int CakeId { get; set; }
-        public CakeModel Product { get; set; }
-        public DetailProductPage(int cakeId)
+        public CheckoutPage()
         {
             InitializeComponent();
-            CakeId = cakeId;
         }
 
-        private void DetailProductPage_Loaded(object sender, RoutedEventArgs e)
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
-            Product = DatabaseAccess.FindCakeById(CakeId);
-            this.DataContext = Product;
+            this.NavigationService.GoBack();
         }
     }
 }

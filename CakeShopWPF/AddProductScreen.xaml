@@ -61,16 +61,8 @@
             </StackPanel>
             <StackPanel Grid.Column="2">
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Ngày nhập kho</TextBlock>
-                    <TextBox x:Name="tbDate"/>
-                </DockPanel>
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Số lượng nhập</TextBlock>
+                    <TextBlock DockPanel.Dock="Top">Số lượng còn lại</TextBlock>
                     <TextBox x:Name="tbQuantity"/>
-                </DockPanel>
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Tổng tiền nhập hàng</TextBlock>
-                    <TextBox x:Name="tbTotal"/>
                 </DockPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Margin="10" x:Name="addProductBtn" Click="addProductBtn_Click">Thêm</Button>

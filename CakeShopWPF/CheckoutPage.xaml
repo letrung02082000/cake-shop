@@ -1,0 +1,73 @@
+﻿<Page x:Class="CakeShopWPF.CheckoutPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CakeShopWPF"
+      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CheckoutPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button x:Name="BackBtn" Click="BackBtn_Click">Quay lại</Button>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="201*"/>
+                <ColumnDefinition Width="199*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <DockPanel LastChildFill="False">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <Label DockPanel.Dock="Top">Thanh toán trực tiếp</Label>
+                        <RadioButton/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock>Tiền mặt</TextBlock>
+                        <TextBox Width="50"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock>Trả lại</TextBlock>
+                        <TextBox Width="50"/>
+                    </StackPanel>
+                    <Button DockPanel.Dock="Bottom">Xác nhận</Button>
+                </DockPanel>
+
+            </Grid>
+            <Grid Grid.Column="1">
+                <DockPanel LastChildFill="False">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <Label DockPanel.Dock="Top">Giao hàng tận nơi</Label>
+                        <RadioButton/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+                        <TextBlock>Địa chỉ</TextBlock>
+                        <TextBox Width="Auto"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock>Phí giao hàng</TextBlock>
+                        <TextBox Width="50"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock>Tổng thu</TextBlock>
+                        <TextBox Width="50"></TextBox>
+                    </StackPanel>
+                    <Button DockPanel.Dock="Bottom">Xác nhận</Button>
+
+                </DockPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

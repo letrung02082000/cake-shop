@@ -41,10 +41,16 @@ namespace CakeShopWPF
 
             int cakePrice = 0;
             int.TryParse(tbPrice.Text, out cakePrice);
-            
+
             Product.CakePrice = cakePrice;
 
+            int cakeQuantity = 0;
+            int.TryParse(tbQuantity.Text, out cakeQuantity);
+
+            Product.CakeQuantity = cakeQuantity;
+
             Product.CakeId = DatabaseAccess.SaveCake(Product);
+            MessageBox.Show(Product.CakeId.ToString());
         }
     }
 }

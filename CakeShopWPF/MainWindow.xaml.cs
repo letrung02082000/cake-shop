@@ -23,6 +23,7 @@ namespace CakeShopWPF
         public MainWindow()
         {
             InitializeComponent();
+            Cart.CartList = new System.Collections.ObjectModel.ObservableCollection<ModelLib.CakeModel>();
         }
 
         private void ChangeMenuPointer(int index)
@@ -54,6 +55,8 @@ namespace CakeShopWPF
             GridContent.Children.Clear();
             ChangeMenuPointer(2);
             ListViewMenu.SelectedIndex = 2;
+            OrderScreen orderScreen = new OrderScreen();
+            GridContent.Children.Add(orderScreen);
         }
 
         private void Statistics_Click(object sender, RoutedEventArgs e)

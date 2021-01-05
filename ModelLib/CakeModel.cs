@@ -16,5 +16,6 @@ namespace ModelLib
         public int CakePrice { get; set; }
         public string CakeDesc { get; set; }
         public string CakeImage { get; set; }
+        public int CakeQuantity { get; set; }
     }
 }

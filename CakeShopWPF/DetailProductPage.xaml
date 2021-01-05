@@ -19,9 +19,9 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="101*"/>
-            <ColumnDefinition Width="199*"/>
+            <ColumnDefinition Width="121*"/>
+            <ColumnDefinition Width="120*"/>
+            <ColumnDefinition Width="159*"/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
@@ -32,6 +32,8 @@
                 <TextBlock Text="{Binding CakeDesc}"/>
             </StackPanel>
         </Grid>
-
+        <Grid Grid.Column="1">
+            <Image/>
+        </Grid>
     </Grid>
 </Page>
