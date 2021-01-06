@@ -53,6 +53,7 @@
     <Compile Include="CakeModel.cs" />
     <Compile Include="CustomerModel.cs" />
     <Compile Include="DatabaseAccess.cs" />
+    <Compile Include="OrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -26,11 +26,12 @@ namespace CakeShopWPF
         public HomePage()
         {
             InitializeComponent();
+            CakeList = new ObservableCollection<CakeModel>(DatabaseAccess.LoadCake());
         }
 
         private void HomePage_Loaded(object sender, RoutedEventArgs e)
         {
-            CakeList = new ObservableCollection<CakeModel>(DatabaseAccess.LoadCake());
+            
             CakeListView.ItemsSource = CakeList;
         }
 
@@ -63,12 +64,14 @@ namespace CakeShopWPF
 
             foreach (var cartCake in Cart.CartList)
             {
-                if (cartCake == CakeList[index])
+                if (cartCake.CakeId == CakeList[index].CakeId)
                 {
                     MessageBox.Show("San pham da duoc them vao don hang");
                     return;
                 }
             }
+
+            CakeList[index].CartQuantity = 1;
 
             Cart.CartList.Add(CakeList[index]);
         }

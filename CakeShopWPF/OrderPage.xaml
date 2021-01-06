@@ -14,6 +14,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Loaded="OrderPage_Loaded"
+      Unloaded="OrderPage_Unloaded"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OrderPage">
 
@@ -30,7 +31,7 @@
             <DockPanel Grid.Row="0" LastChildFill="False">
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                     <Label>Khách hàng cũ</Label>
-                    <RadioButton/>
+                    <RadioButton x:Name="OldCustomerBtn" Checked="OldCustomerBtn_Checked"/>
                 </StackPanel>
                 <ComboBox SelectionChanged="CustomerComboBox_SelectionChanged" x:Name="CustomerComboBox" Width="Auto" DockPanel.Dock="Top" materialDesign:HintAssist.Hint="Chọn khách hàng">
                     <ComboBox.ItemTemplate>
@@ -56,13 +57,13 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </DockPanel>
-            <DockPanel Grid.Row="1">
+            <DockPanel Grid.Row="1" LastChildFill="False">
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                     <Label>Khách hàng mới</Label>
-                    <RadioButton/>
+                    <RadioButton IsChecked="False" x:Name="NewCustomerBtn" Checked="NewCustomerBtn_Checked"/>
                 </StackPanel>
-                <TextBox DockPanel.Dock="Top" x:Name="tbCustomerName" materialDesign:HintAssist.Hint="Tên khách hàng"/>
-                <TextBox x:Name="tbCustomerTel" materialDesign:HintAssist.Hint="Số điện thoại"/>
+                <TextBox TextChanged="tbCustomerName_TextChanged" DockPanel.Dock="Top" x:Name="tbCustomerName" materialDesign:HintAssist.Hint="Tên khách hàng"/>
+                <TextBox TextChanged="tbCustomerTel_TextChanged" DockPanel.Dock="Top" x:Name="tbCustomerTel" materialDesign:HintAssist.Hint="Số điện thoại"/>
             </DockPanel>
         </Grid>
         <Grid Grid.Column="1">
@@ -73,7 +74,7 @@
             </Grid.RowDefinitions>
             <Label Grid.Row="0">Sản phẩm</Label>
             <TextBlock Grid.Row="1" x:Name="txtNotification"/>
-            <ListView Grid.Row="1" x:Name="CartListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="3">
+            <ListView Grid.Row="1" x:Name="CartListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Vertical"/>
@@ -83,11 +84,11 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding CakeName}"/>
-                            <Button>
+                            <Button x:Name="DecreaseQuantityBtn" Click="DecreaseQuantityBtn_Click">
                                 <materialDesign:PackIcon Kind="Remove"/>
                             </Button>
-                            <TextBox Width="100" x:Name="tbQuantity"/>
-                            <Button>
+                            <TextBox Width="100" x:Name="tbQuantity" Text="{Binding CartQuantity}" TextChanged="tbQuantity_TextChanged"/>
+                            <Button x:Name="IncreaseQuantityBtn" Click="IncreaseQuantityBtn_Click">
                                 <materialDesign:PackIcon Kind="Add"/>
                             </Button>
                         </StackPanel>

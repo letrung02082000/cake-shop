@@ -71,6 +71,44 @@ namespace ModelLib
             }
         }
 
+        //Order CRUD
+        public static List<OrderModel> LoadOrder()
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = connection.Query<OrderModel>($"Select * from order", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+
+        public static OrderModel FindOrderById(int orderId)
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = connection.QuerySingle<OrderModel>($"Select * from order where orderId = {orderId}");
+                return output;
+            }
+        }
+
+        public static int SaveOrder(OrderModel order)
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                int orderId = connection.ExecuteScalar<int>("INSERT INTO order(customerId, orderStatus, shippingFee, totalPrice, orderDate, shippingAddress) VALUES(@CustomerId, @OrderStatus, @ShippingFee, @TotalPrice, @OrderDate, @ShippingAddress); SELECT last_insert_rowid()", order);
+                return orderId;
+            }
+        }
+
+        //Order Item CRUD
+        public static int SaveOrderItem(int orderId, int cakeId)
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                int output = connection.ExecuteScalar<int>("INSERT INTO order_item(orderId, cakeId) VALUES(@orderId, @cakeId)", new { orderId, cakeId});
+                return output;
+            }
+        }
+
         private static string LoadConnectionString(string id = "default")
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;

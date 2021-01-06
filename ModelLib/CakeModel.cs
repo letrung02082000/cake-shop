@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ModelLib
 {
-    public class CakeModel
+    public class CakeModel:INotifyPropertyChanged
     {
         public int CakeId { get; set; }
         public string CakeCode { get; set; }
@@ -17,5 +18,20 @@ namespace ModelLib
         public string CakeDesc { get; set; }
         public string CakeImage { get; set; }
         public int CakeQuantity { get; set; }
+        private int _cartQuantity;
+        public int CartQuantity
+        {
+            get => _cartQuantity;
+            set
+            {
+                _cartQuantity = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("CartQuantity"));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
