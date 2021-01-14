@@ -73,7 +73,10 @@
                 <RowDefinition Height="26*"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0">Sản phẩm</Label>
-            <TextBlock Grid.Row="1" x:Name="txtNotification"/>
+            <DockPanel  x:Name="txtNotification" Grid.Row="1" Visibility="Hidden">
+                <TextBlock DockPanel.Dock="Top" Grid.Row="1">Không có sản phẩm</TextBlock>
+                <Button x:Name="addCartBtn" Click="addCartBtn_Click">Thêm ngay</Button>
+            </DockPanel>
             <ListView Grid.Row="1" x:Name="CartListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -90,6 +93,9 @@
                             <TextBox Width="100" x:Name="tbQuantity" Text="{Binding CartQuantity}" TextChanged="tbQuantity_TextChanged"/>
                             <Button x:Name="IncreaseQuantityBtn" Click="IncreaseQuantityBtn_Click">
                                 <materialDesign:PackIcon Kind="Add"/>
+                            </Button>
+                            <Button x:Name="deleteBtn" Click="deleteBtn_Click">
+                                <materialDesign:PackIcon Kind="Delete"/>
                             </Button>
                         </StackPanel>
                     </DataTemplate>

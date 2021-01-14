@@ -35,7 +35,7 @@ namespace CakeShopWPF
 
         private void Checkout_Loaded(object sender, RoutedEventArgs e)
         {
-            DirectBtn.IsChecked = true;
+            
 
             int totalPrice = 0;
 
@@ -50,6 +50,8 @@ namespace CakeShopWPF
             tbDirectTotalPrice.Text = totalPrice.ToString();
             tbShippingFee.Text = "30000";
             tbDeliveryTotalPrice.Text = $"{DeliveryTotalPrice}";
+
+            DirectBtn.IsChecked = true;
         }
 
         private void tbCash_TextChanged(object sender, TextChangedEventArgs e)
@@ -112,11 +114,14 @@ namespace CakeShopWPF
         {
             OrderModel order = new OrderModel();
 
+            order.OrderDate = DateTime.Now.ToString();
+
             if (Cart.IsOldCustomer)
             {
                 int customerId = Cart.OldCustomer.CustomerId;
                 
-                order.CustomerId = customerId;            }
+                order.CustomerId = customerId;
+            }
             else
             {
                 int customerId = DatabaseAccess.SaveCustomer(Cart.NewCustomer);

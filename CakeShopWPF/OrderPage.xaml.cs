@@ -31,6 +31,12 @@ namespace CakeShopWPF
 
         private void OrderPage_Loaded(object sender, RoutedEventArgs e)
         {
+            if(Cart.CartList.Count == 0)
+            {
+                txtNotification.Visibility = Visibility.Visible;
+                CartListView.Visibility = Visibility.Hidden;
+            }
+
             CartListView.ItemsSource = Cart.CartList;
             CustomerList = new ObservableCollection<CustomerModel>(DatabaseAccess.LoadCustomer());
             CustomerComboBox.ItemsSource = CustomerList;
@@ -156,6 +162,17 @@ namespace CakeShopWPF
             int quantity = 1;
             int.TryParse((sender as TextBox).Text, out quantity);
             Cart.CartList[index].CartQuantity = quantity;
+        }
+
+        private void deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int index = CartListView.Items.IndexOf((sender as FrameworkElement).DataContext);
+            Cart.CartList.RemoveAt(index);
+        }
+
+        private void addCartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new HomePage());
         }
     }
 }

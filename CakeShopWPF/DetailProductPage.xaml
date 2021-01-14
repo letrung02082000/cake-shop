@@ -18,22 +18,34 @@
       Title="DetailProductPage">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="121*"/>
-            <ColumnDefinition Width="120*"/>
-            <ColumnDefinition Width="159*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28*"/>
+            <RowDefinition Height="197*"/>
+        </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="{Binding CakeName}"/>
-                <TextBlock Text="{Binding CakeCode}"/>
-                <TextBlock Text="{Binding CakePrice}"/>
-                <TextBlock Text="{Binding CakeDesc}"/>
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Column="1">
-            <Image/>
+        <DockPanel LastChildFill="False">
+            <Button DockPanel.Dock="Left" x:Name="goBackBtn" Click="goBackBtn_Click">Quay lại</Button>
+            <Button DockPanel.Dock="Right" x:Name="editProductBtn" Click="editProductBtn_Click">Cập nhật</Button>
+        </DockPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="121*"/>
+                <ColumnDefinition Width="120*"/>
+                <ColumnDefinition Width="159*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding CakeName}"/>
+                    <TextBlock Text="{Binding CakeCode}"/>
+                    <TextBlock Text="{Binding CakePrice}"/>
+                    <TextBlock Text="{Binding CakeDesc}"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Image/>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

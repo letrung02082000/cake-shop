@@ -31,7 +31,6 @@ namespace ModelLib
                 }
             }
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -53,9 +53,14 @@ namespace CakeShopWPF
         private void CakeListView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             int selectedIndex = CakeListView.SelectedIndex;
-            int cakeId = CakeList[selectedIndex].CakeId;
-            DetailProductPage detailProductPage = new DetailProductPage(cakeId);
-            this.NavigationService.Navigate(detailProductPage);
+
+            if(selectedIndex >= 0)
+            {
+                int cakeId = CakeList[selectedIndex].CakeId;
+                DetailProductPage detailProductPage = new DetailProductPage(cakeId);
+                this.NavigationService.Navigate(detailProductPage);
+            }
+
         }
 
         private void addToCartBtn_Click(object sender, RoutedEventArgs e)

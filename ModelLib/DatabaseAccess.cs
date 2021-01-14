@@ -18,7 +18,7 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.Query<CakeModel>($"Select * from cake", new DynamicParameters());
+                var output = connection.Query<CakeModel>($"Select cakeId, cakeCode, cakeName, cakeName2, category.cateName, cakePrice, cakeDesc, cakeImage, cakeQuantity from cake JOIN category on cake.cakeCat = category.cateId", new DynamicParameters());
                 return output.ToList();
             }
         }
@@ -27,7 +27,7 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.QuerySingle<CakeModel>($"Select * from cake where cakeId = {cakeId}");
+                var output = connection.QuerySingle<CakeModel>($"Select cakeId, cakeCode, cakeName, cakeName2, category.cateName as cakeCat, cakePrice, cakeDesc, cakeImage, cakeQuantity from cake JOIN category on cake.cakeCat = category.cateId where cakeId = {cakeId}");
                 return output;
             }
         }
@@ -38,6 +38,16 @@ namespace ModelLib
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
                 int cakeId = connection.ExecuteScalar<int>("INSERT INTO cake(cakeCode, cakeName, cakeName2, cakeCat, cakePrice, cakeDesc, cakeImage, cakeQuantity) VALUES(@CakeCode, @CakeName, @CakeName2, @CakeCat, @CakePrice, @CakeDesc, @CakeImage, @CakeQuantity); SELECT last_insert_rowid()", cake);
+                return cakeId;
+            }
+        }
+
+        public static int UpdateCake(CakeModel cake)
+        {
+            cake.CakeName2 = ConvertToUnSign(cake.CakeName);
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                int cakeId = connection.ExecuteScalar<int>("UPDATE cake SET cakeCode = @CakeCode, cakeName = @CakeName, cakeName2 = @CakeName2, cakeCat = @CakeCat, cakePrice = @CakePrice, cakeDesc = @CakeDesc, cakeImage = @CakeImage, cakeQuantity = @CakeQuantity WHERE cakeId = @CakeId; SELECT last_insert_rowid()", cake);
                 return cakeId;
             }
         }
@@ -94,7 +104,7 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                int orderId = connection.ExecuteScalar<int>("INSERT INTO order(customerId, orderStatus, shippingFee, totalPrice, orderDate, shippingAddress) VALUES(@CustomerId, @OrderStatus, @ShippingFee, @TotalPrice, @OrderDate, @ShippingAddress); SELECT last_insert_rowid()", order);
+                int orderId = connection.ExecuteScalar<int>("INSERT INTO order_cake(customerId, orderStatus, shippingFee, totalPrice, orderDate, shippingAddress) VALUES(@CustomerId, @OrderStatus, @ShippingFee, @TotalPrice, @OrderDate, @ShippingAddress); SELECT last_insert_rowid()", order);
                 return orderId;
             }
         }

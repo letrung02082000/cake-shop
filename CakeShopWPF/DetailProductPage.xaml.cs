@@ -34,5 +34,15 @@ namespace CakeShopWPF
             Product = DatabaseAccess.FindCakeById(CakeId);
             this.DataContext = Product;
         }
+
+        private void goBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
+        private void editProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new EditProductPage(Product));
+        }
     }
 }
