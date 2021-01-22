@@ -123,7 +123,7 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.Query<OrderItem>($"SELECT order_cake.orderId, order_item.cakeId, cake.cakeName FROM order_item JOIN order_cake ON order_item.cakeId = order_item.cakeId JOIN cake on order_item.cakeId = cake.cakeId WHERE order_cake.orderId = {orderId}");
+                var output = connection.Query<OrderItem>($"SELECT order_cake.orderId, order_item.cakeId, cake.cakeName, cake.cakeCode FROM order_item JOIN order_cake ON order_item.cakeId = order_item.cakeId JOIN cake on order_item.cakeId = cake.cakeId WHERE order_cake.orderId = {orderId}");
                 return output.ToList();
             }
         }

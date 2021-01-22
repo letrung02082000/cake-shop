@@ -29,11 +29,12 @@ namespace CakeShopWPF
             InitializeComponent();
             Order = order;
             OrderItemList = new ObservableCollection<OrderItem>(DatabaseAccess.LoadOrderItem(order.OrderId));
-        }
+        }   
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             OrderStackPanel.DataContext = Order;
+            OrderItemListView.ItemsSource = OrderItemList;
         }
     }
 }

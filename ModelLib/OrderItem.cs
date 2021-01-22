@@ -11,5 +11,6 @@ namespace ModelLib
         public int OrderId { get; set; }
         public int CakeId { get; set; }
         public string CakeName { get; set; }
+        public string CakeCode { get; set; }
     }
 }

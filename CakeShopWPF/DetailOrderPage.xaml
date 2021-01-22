@@ -18,12 +18,21 @@
       Title="DetailOrderPage">
 
     <Grid>
-        <StackPanel Orientation="Vertical" x:Name="OrderStackPanel">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" x:Name="OrderStackPanel" Grid.Column="0">
             <TextBlock Text="{Binding OrderId}"/>
             <TextBlock Text="{Binding CustomerName}"/>
         </StackPanel>
-        <StackPanel>
-            <TextBlock Text="{Binding CakeName}"/>
-        </StackPanel>
+        <ListView x:Name="OrderItemListView" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Mã bánh" DisplayMemberBinding="{Binding CakeCode}"/>
+                    <GridViewColumn Header="Tên bánh" DisplayMemberBinding="{Binding CakeName}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

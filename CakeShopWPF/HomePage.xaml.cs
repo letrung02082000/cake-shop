@@ -25,8 +25,21 @@ namespace CakeShopWPF
     {
         public ObservableCollection<CakeModel> CakeList { get; set; }
         public ObservableCollection<CakeModel> CurrentCakeList { get; set; }
+        public ObservableCollection<CakeModel> DisplayCakeList { get; set; }
         public ObservableCollection<CategoryModel> CategoryList { get; set; }
-        public int TotalPage { get; set; }
+        private int totalPage;
+        public int TotalPage
+        {
+            get { return totalPage; }
+            set
+            {
+                if (this.totalPage != value)
+                {
+                    this.totalPage = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalPage"));
+                }
+            }
+        }
         private int currentPage = 1;
         public int CurrentPage
         {
@@ -53,7 +66,7 @@ namespace CakeShopWPF
         {
             CakeList = new ObservableCollection<CakeModel>(DatabaseAccess.LoadCake());
             CategoryList = new ObservableCollection<CategoryModel>(DatabaseAccess.LoadAllCategories());
-
+            CategoryList.Insert(0, new CategoryModel { CateId = -1, CateName = "Tất cả" });
             cbbFilter.ItemsSource = CategoryList;
 
             string rowPerPageStr = "5";
@@ -62,18 +75,22 @@ namespace CakeShopWPF
             int.TryParse(rowPerPageStr, out rowPerPageInt);
             RowPerPage = rowPerPageInt;
 
-            TotalPage = CakeList.Count / RowPerPage + (CakeList.Count % RowPerPage == 0 ? 0 : 1);
-            CurrentCakeList = new ObservableCollection<CakeModel>(CakeList.Skip(RowPerPage * (CurrentPage-1)).Take(RowPerPage).ToList());
-            CakeListView.ItemsSource = CurrentCakeList;
+            CurrentCakeList = CakeList;
+
+            CurrentPage = 1;
+            TotalPage = CurrentCakeList.Count / RowPerPage + (CurrentCakeList.Count % RowPerPage == 0 ? 0 : 1);
+
+            if (TotalPage == 0)
+            {
+                CurrentPage = 0;
+            }
+
+            DisplayCakeList = new ObservableCollection<CakeModel>(CurrentCakeList.Skip(RowPerPage * (CurrentPage - 1)).Take(RowPerPage).ToList());
+            CakeListView.ItemsSource = DisplayCakeList;
             this.DataContext = this;
         }
 
         private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void Search_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -116,14 +133,15 @@ namespace CakeShopWPF
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(CurrentPage == 1)
+            if(CurrentPage <= 1)
             {
                 return;
             } else
             {
                 --CurrentPage;
-                CurrentCakeList = new ObservableCollection<CakeModel>(CakeList.Skip(RowPerPage * (CurrentPage-1)).Take(RowPerPage).ToList());
-                CakeListView.ItemsSource = CurrentCakeList;
+                TotalPage = CurrentCakeList.Count / RowPerPage + (CurrentCakeList.Count % RowPerPage == 0 ? 0 : 1);
+                DisplayCakeList = new ObservableCollection<CakeModel>(CurrentCakeList.Skip(RowPerPage * (CurrentPage - 1)).Take(RowPerPage).ToList());
+                CakeListView.ItemsSource = DisplayCakeList;
             }
         }
 
@@ -136,8 +154,9 @@ namespace CakeShopWPF
             else
             {
                 ++CurrentPage;
-                CurrentCakeList = new ObservableCollection<CakeModel>(CakeList.Skip(RowPerPage * (CurrentPage-1)).Take(RowPerPage).ToList());
-                CakeListView.ItemsSource = CurrentCakeList;
+                TotalPage = CurrentCakeList.Count / RowPerPage + (CurrentCakeList.Count % RowPerPage == 0 ? 0 : 1);
+                DisplayCakeList = new ObservableCollection<CakeModel>(CurrentCakeList.Skip(RowPerPage * (CurrentPage - 1)).Take(RowPerPage).ToList());
+                CakeListView.ItemsSource = DisplayCakeList;
             }
         }
 
@@ -146,7 +165,16 @@ namespace CakeShopWPF
             
             int categoryId = 0;
 
-            if (cbbFilter.SelectedIndex >=0 )
+            if(cbbFilter.SelectedIndex == 0)
+            {
+                CurrentCakeList = CakeList;
+                CurrentPage = 1;
+                TotalPage = CurrentCakeList.Count / RowPerPage + (CurrentCakeList.Count % RowPerPage == 0 ? 0 : 1);
+                DisplayCakeList = new ObservableCollection<CakeModel>(CurrentCakeList.Skip(RowPerPage * (CurrentPage - 1)).Take(RowPerPage).ToList());
+                CakeListView.ItemsSource = DisplayCakeList;
+            }
+
+            if (cbbFilter.SelectedIndex > 0 )
             {
                 CategoryModel category = cbbFilter.SelectedItem as CategoryModel;
                 categoryId = category.CateId;
@@ -157,14 +185,51 @@ namespace CakeShopWPF
             }
 
             CurrentCakeList = new ObservableCollection<CakeModel>(DatabaseAccess.FindCakeByCategory(categoryId));
-            CakeListView.ItemsSource = CurrentCakeList;
-            
+            CurrentPage = 1;
+            TotalPage = CurrentCakeList.Count / RowPerPage + (CurrentCakeList.Count % RowPerPage == 0 ? 0 : 1);
+
+            if(TotalPage == 0)
+            {
+                CurrentPage = 0;
+            }
+
+            DisplayCakeList = new ObservableCollection<CakeModel>(CurrentCakeList.Skip(RowPerPage * (CurrentPage - 1)).Take(RowPerPage).ToList());
+            CakeListView.ItemsSource = DisplayCakeList;
+
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchValue = (sender as TextBox).Text;
-            MessageBox.Show(searchValue);
+            string searchValue = (sender as TextBox).Text.Trim();
+            searchValue = DatabaseAccess.ConvertToUnSign(searchValue);
+
+            if(searchValue == "")
+            {
+                CurrentCakeList = new ObservableCollection<CakeModel>(CakeList.Skip(RowPerPage * (CurrentPage - 1)).Take(RowPerPage).ToList());
+                CakeListView.ItemsSource = CurrentCakeList;
+                return;
+            }
+
+            var searchResult = from cake in CakeList
+                               where cake.CakeName2.Contains(searchValue)
+                               select cake;
+
+            CurrentCakeList = new ObservableCollection<CakeModel>(searchResult.ToList());
+            CurrentPage = 1;
+            TotalPage = CurrentCakeList.Count / RowPerPage + (CurrentCakeList.Count % RowPerPage == 0 ? 0 : 1);
+
+            if (TotalPage == 0)
+            {
+                CurrentPage = 0;
+            }
+
+            DisplayCakeList = new ObservableCollection<CakeModel>(CurrentCakeList.Skip(RowPerPage * (CurrentPage - 1)).Take(RowPerPage).ToList());
+            CakeListView.ItemsSource = DisplayCakeList;
+        }
+
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
