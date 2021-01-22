@@ -70,6 +70,30 @@ namespace CakeShopWPF
 
         private void CheckoutBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (Cart.CartList.Count == 0)
+            {
+                MessageBox.Show("Không có sản phẩm trong giỏ hàng!");
+                return;
+            }
+
+            if (OldCustomerBtn.IsChecked == true)
+            {
+                if (CustomerComboBox.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Vui lòng chọn thông tin khách hàng!");
+                    return;
+                }
+            }
+            else
+            {
+                if(tbCustomerName.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show("Vui lòng nhập tên khách hàng!");
+                    return;
+                }
+            }
+
+
             this.NavigationService.Navigate(new CheckoutPage());
         }
 

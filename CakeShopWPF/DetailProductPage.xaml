@@ -41,6 +41,8 @@
                     <TextBlock Text="{Binding CakeCode}"/>
                     <TextBlock Text="{Binding CakePrice}"/>
                     <TextBlock Text="{Binding CakeDesc}"/>
+                    <TextBlock Text="{Binding CateName}"/>
+                    <TextBlock Text="{Binding CakeQuantity}"/>
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1">

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,19 +21,51 @@ namespace CakeShopWPF
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class HomePage : Page, INotifyPropertyChanged
     {
         public ObservableCollection<CakeModel> CakeList { get; set; }
+        public ObservableCollection<CakeModel> CurrentCakeList { get; set; }
+        public ObservableCollection<CategoryModel> CategoryList { get; set; }
+        public int TotalPage { get; set; }
+        private int currentPage = 1;
+        public int CurrentPage
+        {
+            get { return currentPage; }
+            set
+            {
+                if (this.currentPage != value)
+                {
+                    this.currentPage = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentPage"));
+                }
+            }
+        }
+        public int RowPerPage { get; set; }
         public HomePage()
         {
             InitializeComponent();
-            CakeList = new ObservableCollection<CakeModel>(DatabaseAccess.LoadCake());
+            
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void HomePage_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            CakeListView.ItemsSource = CakeList;
+            CakeList = new ObservableCollection<CakeModel>(DatabaseAccess.LoadCake());
+            CategoryList = new ObservableCollection<CategoryModel>(DatabaseAccess.LoadAllCategories());
+
+            cbbFilter.ItemsSource = CategoryList;
+
+            string rowPerPageStr = "5";
+            int rowPerPageInt = 5;
+            Setting.readSettingDB("row", ref rowPerPageStr);
+            int.TryParse(rowPerPageStr, out rowPerPageInt);
+            RowPerPage = rowPerPageInt;
+
+            TotalPage = CakeList.Count / RowPerPage + (CakeList.Count % RowPerPage == 0 ? 0 : 1);
+            CurrentCakeList = new ObservableCollection<CakeModel>(CakeList.Skip(RowPerPage * (CurrentPage-1)).Take(RowPerPage).ToList());
+            CakeListView.ItemsSource = CurrentCakeList;
+            this.DataContext = this;
         }
 
         private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
@@ -79,6 +112,53 @@ namespace CakeShopWPF
             CakeList[index].CartQuantity = 1;
 
             Cart.CartList.Add(CakeList[index]);
+        }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(CurrentPage == 1)
+            {
+                return;
+            } else
+            {
+                --CurrentPage;
+                CurrentCakeList = new ObservableCollection<CakeModel>(CakeList.Skip(RowPerPage * (CurrentPage-1)).Take(RowPerPage).ToList());
+                CakeListView.ItemsSource = CurrentCakeList;
+            }
+        }
+
+        private void NextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentPage == TotalPage)
+            {
+                return;
+            }
+            else
+            {
+                ++CurrentPage;
+                CurrentCakeList = new ObservableCollection<CakeModel>(CakeList.Skip(RowPerPage * (CurrentPage-1)).Take(RowPerPage).ToList());
+                CakeListView.ItemsSource = CurrentCakeList;
+            }
+        }
+
+        private void cbbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            int categoryId = 0;
+
+            if (cbbFilter.SelectedIndex >=0 )
+            {
+                CategoryModel category = cbbFilter.SelectedItem as CategoryModel;
+                categoryId = category.CateId;
+            }
+            else
+            {
+                return;
+            }
+
+            CurrentCakeList = new ObservableCollection<CakeModel>(DatabaseAccess.FindCakeByCategory(categoryId));
+            CakeListView.ItemsSource = CurrentCakeList;
+            
         }
     }
 }

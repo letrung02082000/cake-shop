@@ -24,10 +24,17 @@
             <RowDefinition Height="67*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
+
             <StackPanel Height="45" DockPanel.Dock="Top" Background="{x:Null}"
                     Margin="0,9,0,9"
                     Orientation="Horizontal" HorizontalAlignment="Center">
-
+                <ComboBox x:Name="cbbFilter" Width="150" SelectionChanged="cbbFilter_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding CateName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <Border BorderThickness="2" CornerRadius="3" BorderBrush="#B8B8B8">
                     <TextBox x:Name="SearchTextBox" KeyDown="TextBox_KeyDown" KeyUp="SearchTextBox_KeyUp"
                              materialDesign:HintAssist.Hint="Tìm món ăn ở đây" Background="#EDEDED" 
@@ -36,6 +43,21 @@
                 <Button Margin="10,0,0,0" Padding="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" 
                         Width="65" Height="45" Click="Search_Click">
                     <materialDesign:PackIcon Kind="Search"  Foreground="#B8B8B8" Width="65" Height="45"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding CurrentPage}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="/" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding TotalPage}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="BackBtn" Click="BackBtn_Click">
+                    <materialDesign:PackIcon Kind="NavigateBefore"/>
+                </Button>
+                <Button x:Name="NextBtn" Click="NextBtn_Click">
+                    <materialDesign:PackIcon Kind="NavigateNext"/>
                 </Button>
             </StackPanel>
         </Grid>

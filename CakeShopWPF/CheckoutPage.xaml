@@ -59,7 +59,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
                         <TextBlock>Địa chỉ</TextBlock>
-                        <TextBox Width="Auto" TextChanged="tbShippingAdress_TextChanged"  x:Name="tbShippingAdress"/>
+                        <TextBox Width="Auto" TextChanged="tbShippingAddress_TextChanged"  x:Name="tbShippingAddress"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                         <TextBlock>Phí giao hàng</TextBlock>

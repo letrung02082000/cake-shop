@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="CakeShopWPF.SettingScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CakeShopWPF"
+             mc:Ignorable="d" 
+             Loaded="SettingScreen_Loaded"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Item per page</TextBlock>
+                <TextBox x:Name="tbRowPerPage" Width="50"/>
+                <Button x:Name="confirmRowBtn" Content="OK" Click="confirmRowBtn_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Hiển thị thông tin ngẫu nhiên khi khởi động</TextBlock>
+                <CheckBox x:Name="cbSplashScreen" Checked="cbSplashScreen_Checked" Unchecked="cbSplashScreen_Unchecked"/>
+            </StackPanel>
+        </StackPanel>
+            
+    </Grid>
+</UserControl>

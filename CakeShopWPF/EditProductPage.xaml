@@ -30,16 +30,29 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="21*"/>
                 <ColumnDefinition Width="120*"/>
                 <ColumnDefinition Width="121*"/>
                 <ColumnDefinition Width="138*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel Grid.Column="0">
                 <TextBox x:Name="txtCakeName" Text="{Binding CakeName}"/>
                 <TextBox x:Name="txtCakeCode" Text="{Binding CakeCode}"/>
-                <TextBox x:Name="txtCakeCat" Text="{Binding CakeCat}"/>
+                <TextBlock DockPanel.Dock="Top">Loại sản phẩm cũ</TextBlock>
+                <ComboBox x:Name="cbbCakeCat" SelectionChanged="cbbCakeCat_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding CateName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                        <TextBlock DockPanel.Dock="Top">Loại sản phẩm mới</TextBlock>
+                        <RadioButton x:Name="rbNewCategory" IsChecked="False"/>
+                    </StackPanel>
+                    <TextBox DockPanel.Dock="Top" TextChanged="tbNewCategory_TextChanged" x:Name="tbNewCategory"/>
+                </DockPanel>
                 <TextBox x:Name="txtCakePrice" Text="{Binding CakePrice}"/>
                 <TextBox x:Name="txtCakeDesc" Text="{Binding CakeDesc}"/>
                 <TextBox x:Name="txtCakeImage" Text="{Binding CakeImage}"/>

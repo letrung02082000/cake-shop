@@ -51,11 +51,28 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="1">
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Loại sản phẩm</TextBlock>
-                    <TextBox x:Name="tbCategory"/>
+                    <TextBlock DockPanel.Dock="Top">Loại sản phẩm cũ</TextBlock>
+                    <ComboBox x:Name="cbbCategory" SelectionChanged="cbbCategory_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CateName}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </DockPanel>
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Ảnh sản phẩm</TextBlock>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                        <TextBlock DockPanel.Dock="Top">Loại sản phẩm mới</TextBlock>
+                        <RadioButton x:Name="rbNewCategory" IsChecked="False"/>
+                    </StackPanel>
+                    <TextBox DockPanel.Dock="Top" TextChanged="tbNewCategory_TextChanged" x:Name="tbNewCategory"/>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel  DockPanel.Dock="Top" Orientation="Horizontal">
+                        <TextBlock>Ảnh sản phẩm</TextBlock>
+                        <Button x:Name="addImageBtn" Click="addImageBtn_Click">Thêm</Button>
+                    </StackPanel>
+                    
                     <Image x:Name="productImage"/>
                 </DockPanel>
             </StackPanel>

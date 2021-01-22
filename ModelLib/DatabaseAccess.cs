@@ -18,7 +18,7 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.Query<CakeModel>($"Select cakeId, cakeCode, cakeName, cakeName2, category.cateName, cakePrice, cakeDesc, cakeImage, cakeQuantity from cake JOIN category on cake.cakeCat = category.cateId", new DynamicParameters());
+                var output = connection.Query<CakeModel>($"Select cakeId, cakeCode, cakeName, cakeName2, cakeCat, cakePrice, cakeDesc, cakeImage, cakeQuantity from cake JOIN category on cake.cakeCat = category.cateId", new DynamicParameters());
                 return output.ToList();
             }
         }
@@ -27,8 +27,17 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.QuerySingle<CakeModel>($"Select cakeId, cakeCode, cakeName, cakeName2, category.cateName as cakeCat, cakePrice, cakeDesc, cakeImage, cakeQuantity from cake JOIN category on cake.cakeCat = category.cateId where cakeId = {cakeId}");
+                var output = connection.QuerySingle<CakeModel>($"Select cakeId, cakeCode, cakeName, cakeName2, cakeCat, cakePrice, cakeDesc, cakeImage, cakeQuantity, cateName from cake JOIN category on cake.cakeCat = category.cateId where cakeId = {cakeId}");
                 return output;
+            }
+        }
+
+        public static List<CakeModel> FindCakeByCategory(int categoryId)
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = connection.Query<CakeModel>($"Select cakeId, cakeCode, cakeName, cakeName2, cakeCat, cakePrice, cakeDesc, cakeImage, cakeQuantity, cateName from cake JOIN category on cake.cakeCat = category.cateId where cakeCat = {categoryId}");
+                return output.ToList();
             }
         }
 
@@ -86,7 +95,7 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.Query<OrderModel>($"Select * from order", new DynamicParameters());
+                var output = connection.Query<OrderModel>($"Select * from order_cake", new DynamicParameters());
                 return output.ToList();
             }
         }
@@ -114,8 +123,36 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                int output = connection.ExecuteScalar<int>("INSERT INTO order_item(orderId, cakeId) VALUES(@orderId, @cakeId)", new { orderId, cakeId});
+                int output = connection.ExecuteScalar<int>("INSERT INTO order_item(orderId, cakeId) VALUES(@orderId, @cakeId); SELECT last_insert_rowid()", new { orderId, cakeId});
                 return output;
+            }
+        }
+
+        //Category CRUD
+        public static List<CategoryModel> LoadAllCategories()
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = connection.Query<CategoryModel>($"Select * from category", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+
+        public static int SaveCategory(string categoryName)
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                int output = connection.ExecuteScalar<int>("INSERT INTO category(cateName) VALUES(@categoryName); SELECT last_insert_rowid()", new { categoryName });
+                return output;
+            }
+        }
+
+        public static List<TotalPerCategory> LoadTotalByCategory()
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = connection.Query<TotalPerCategory>($"SELECT cakeCat, cateName,sum(cakePrice) as totalCate FROM order_cake JOIN order_item on order_cake.orderId = order_item.orderId JOIN cake on order_item.cakeId = cake.cakeId JOIN category on cake.cakeCat = category.cateId GROUP BY cakeCat, cateName", new DynamicParameters());
+                return output.ToList();
             }
         }
 

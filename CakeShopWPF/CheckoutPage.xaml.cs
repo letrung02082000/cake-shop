@@ -88,12 +88,6 @@ namespace CakeShopWPF
             DeliveryBtn.IsChecked = false;
         }
 
-        private void tbShippingAdress_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            DirectBtn.IsChecked = false;
-            DeliveryBtn.IsChecked = true;
-        }
-
         private void tbShippingFee_TextChanged(object sender, TextChangedEventArgs e)
         {
             DirectBtn.IsChecked = false;
@@ -114,6 +108,49 @@ namespace CakeShopWPF
         {
             OrderModel order = new OrderModel();
 
+            int totalPrice = 0;
+
+            if (DirectBtn.IsChecked == true)
+            {
+                if (!int.TryParse(tbDirectTotalPrice.Text, out totalPrice))
+                {
+                    MessageBox.Show("Vui lòng nhập tổng giá là 1 số!");
+                    return;
+                }
+
+                order.OrderStatus = 1;
+                order.ShippingFee = 0;
+                order.TotalPrice = totalPrice;
+            }
+            else if (DeliveryBtn.IsChecked == true)
+            {
+                
+                int shippingFee = 30000;
+                
+                if(!int.TryParse(tbShippingFee.Text, out shippingFee))
+                {
+                    MessageBox.Show("Vui lòng nhập phí giao hàng là 1 số!");
+                    return;
+                }
+
+                if(tbShippingAddress.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show("Vui lòng nhập địa chỉ giao hàng!");
+                    return;
+                }
+
+                if(!int.TryParse(tbDirectTotalPrice.Text, out totalPrice))
+                {
+                    MessageBox.Show("Vui lòng nhập tổng thu là 1 số!");
+                    return;
+                }
+
+                order.ShippingAddress = tbShippingAddress.Text;
+                order.ShippingFee = shippingFee;
+                order.OrderStatus = 0;
+                order.TotalPrice = totalPrice;
+            }
+
             order.OrderDate = DateTime.Now.ToString();
 
             if (Cart.IsOldCustomer)
@@ -130,31 +167,35 @@ namespace CakeShopWPF
                 order.CustomerId = customerId;
             }
 
-            int totalPrice = 0;
-
-            if (DirectBtn.IsChecked == true)
-            {
-                order.OrderStatus = 1;
-                order.ShippingFee = 0;
-                int.TryParse(tbDirectTotalPrice.Text, out totalPrice);
-                order.TotalPrice = DirectTotalPrice;
-            }
-            else if (DeliveryBtn.IsChecked == true)
-            {
-                order.OrderStatus = 0;
-                int shippingFee = 30000;
-                int.TryParse(tbShippingFee.Text, out shippingFee);
-                order.ShippingFee = shippingFee;
-                order.ShippingAddress = tbShippingAdress.Text;
-                order.TotalPrice = DeliveryTotalPrice;
-            }
-
             int orderId = DatabaseAccess.SaveOrder(order);
 
-            foreach(var cake in Cart.CartList)
+            foreach (var cake in Cart.CartList)
             {
+                CakeModel cakeModel = DatabaseAccess.FindCakeById(cake.CakeId);
+                int cakeQuantity = cakeModel.CakeQuantity;
+                cakeModel.CakeQuantity = cakeModel.CakeQuantity - cake.CartQuantity;
+
+                if (cakeModel.CakeQuantity < 0)
+                {
+                    cakeModel.CakeQuantity = cakeQuantity;
+                    MessageBox.Show("Không đủ số lượng bánh trong kho");
+                    return;
+                }
+            }
+
+            foreach (var cake in Cart.CartList)
+            {
+                DatabaseAccess.UpdateCake(cake);
                 DatabaseAccess.SaveOrderItem(orderId, cake.CakeId);
             }
+
+            MessageBox.Show("Tạo đơn hàng thành công");
+        }
+
+        private void tbShippingAddress_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DirectBtn.IsChecked = false;
+            DeliveryBtn.IsChecked = true;
         }
     }
 }

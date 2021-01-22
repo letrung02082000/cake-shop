@@ -15,5 +15,6 @@ namespace ModelLib
         public int TotalPrice { get; set; }
         public string OrderDate { get; set; }
         public string ShippingAddress { get; set; }
+        public DateTime OrderDateTime { get; set; }
     }
 }

@@ -64,6 +64,8 @@ namespace CakeShopWPF
             GridContent.Children.Clear();
             ChangeMenuPointer(3);
             ListViewMenu.SelectedIndex = 3;
+            StatisticsScreen statisticsScreen = new StatisticsScreen();
+            GridContent.Children.Add(statisticsScreen);
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
@@ -71,6 +73,8 @@ namespace CakeShopWPF
             GridContent.Children.Clear();
             ChangeMenuPointer(4);
             ListViewMenu.SelectedIndex = 4;
+            AboutScreen aboutScreen = new AboutScreen();
+            GridContent.Children.Add(aboutScreen);
         }
 
         private void Setting_Click(object sender, RoutedEventArgs e)
@@ -78,6 +82,8 @@ namespace CakeShopWPF
             GridContent.Children.Clear();
             ChangeMenuPointer(5);
             ListViewMenu.SelectedIndex = 5;
+            SettingScreen settingScreen = new SettingScreen();
+            GridContent.Children.Add(settingScreen);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

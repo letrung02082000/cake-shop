@@ -75,7 +75,6 @@
             <Label Grid.Row="0">Sản phẩm</Label>
             <DockPanel  x:Name="txtNotification" Grid.Row="1" Visibility="Hidden">
                 <TextBlock DockPanel.Dock="Top" Grid.Row="1">Không có sản phẩm</TextBlock>
-                <Button x:Name="addCartBtn" Click="addCartBtn_Click">Thêm ngay</Button>
             </DockPanel>
             <ListView Grid.Row="1" x:Name="CartListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemsPanel>

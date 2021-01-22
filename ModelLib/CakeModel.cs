@@ -13,11 +13,13 @@ namespace ModelLib
         public string CakeCode { get; set; }
         public string CakeName { get; set; }
         public string CakeName2 { get; set; }
-        public string CakeCat { get; set; }
+        public int CakeCat { get; set; }
         public int CakePrice { get; set; }
         public string CakeDesc { get; set; }
         public string CakeImage { get; set; }
         public int CakeQuantity { get; set; }
+        public string CateName { get; set; }
+
         private int _cartQuantity;
         public int CartQuantity
         {
@@ -31,6 +33,7 @@ namespace ModelLib
                 }
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
