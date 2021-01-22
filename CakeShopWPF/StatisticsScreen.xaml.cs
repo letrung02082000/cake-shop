@@ -34,6 +34,7 @@ namespace CakeShopWPF
             InitializeComponent();
             OrderList = new ObservableCollection<OrderModel>(DatabaseAccess.LoadOrder());
             TotalPerCategoryList = new ObservableCollection<TotalPerCategory>(DatabaseAccess.LoadTotalByCategory());
+            _NavigationFrame.Navigate(new AllOrderPage(OrderList));
         }
 
         private void StatisticsScreen_Loaded(object sender, RoutedEventArgs e)
@@ -111,6 +112,15 @@ namespace CakeShopWPF
                     else if (order.OrderDateTime.Month == 12)
                     {
                         month12 += order.TotalPrice;
+                    }
+
+                    if(order.OrderStatus == 1)
+                    {
+                        order.OrderStatusStr = "Đã hoàn thành";
+                    }
+                    else
+                    {
+                        order.OrderStatusStr = "Chưa hoàn thành";
                     }
 
                 }

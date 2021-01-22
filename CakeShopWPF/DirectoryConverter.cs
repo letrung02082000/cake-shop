@@ -12,9 +12,13 @@ namespace CakeShopWPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string directory = value.ToString();
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            return $"{baseDir}\\image\\{directory}";
+            if (value != null)
+            {
+                string directory = value.ToString();
+                string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                return $"{baseDir}\\Image\\{directory}";
+            }
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

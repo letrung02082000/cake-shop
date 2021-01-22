@@ -75,6 +75,12 @@
     <Compile Include="AboutScreen.xaml.cs">
       <DependentUpon>AboutScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AllOrderPage.xaml.cs">
+      <DependentUpon>AllOrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DetailOrderPage.xaml.cs">
+      <DependentUpon>DetailOrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DirectoryConverter.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="SettingScreen.xaml.cs">
@@ -94,7 +100,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AllOrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CheckoutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DetailOrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

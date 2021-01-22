@@ -95,7 +95,7 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.Query<OrderModel>($"Select * from order_cake", new DynamicParameters());
+                var output = connection.Query<OrderModel>($"SELECT orderId, order_cake.customerId, orderStatus, shippingFee, totalPrice, orderDate, shippingAddress, customerName, customerTel  FROM order_cake JOIN customer on order_cake.customerId = customer.customerId", new DynamicParameters());
                 return output.ToList();
             }
         }
@@ -113,12 +113,21 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                int orderId = connection.ExecuteScalar<int>("INSERT INTO order_cake(customerId, orderStatus, shippingFee, totalPrice, orderDate, shippingAddress) VALUES(@CustomerId, @OrderStatus, @ShippingFee, @TotalPrice, @OrderDate, @ShippingAddress); SELECT last_insert_rowid()", order);
+                int orderId = connection.ExecuteScalar<int>("INSERT INTO order_cake(customerId, orderStatus, shippingFee, totalPrice, orderDate, shippingAddress, isDirect) VALUES(@CustomerId, @OrderStatus, @ShippingFee, @TotalPrice, @OrderDate, @ShippingAddress, @IsDirect); SELECT last_insert_rowid()", order);
                 return orderId;
             }
         }
 
         //Order Item CRUD
+        public static List<OrderItem> LoadOrderItem(int orderId)
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = connection.Query<OrderItem>($"SELECT order_cake.orderId, order_item.cakeId, cake.cakeName FROM order_item JOIN order_cake ON order_item.cakeId = order_item.cakeId JOIN cake on order_item.cakeId = cake.cakeId WHERE order_cake.orderId = {orderId}");
+                return output.ToList();
+            }
+        }
+
         public static int SaveOrderItem(int orderId, int cakeId)
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))

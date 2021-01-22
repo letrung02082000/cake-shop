@@ -17,6 +17,10 @@
       Loaded="HomePage_Loaded"
       Title="HomePage">
 
+    <Page.Resources>
+        <local:DirectoryConverter x:Key="directoryConverter"/>
+    </Page.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="14*"/>
@@ -36,7 +40,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Border BorderThickness="2" CornerRadius="3" BorderBrush="#B8B8B8">
-                    <TextBox x:Name="SearchTextBox" KeyDown="TextBox_KeyDown" KeyUp="SearchTextBox_KeyUp"
+                    <TextBox x:Name="SearchTextBox" KeyDown="TextBox_KeyDown" KeyUp="SearchTextBox_KeyUp" TextChanged="SearchTextBox_TextChanged"
                              materialDesign:HintAssist.Hint="Tìm món ăn ở đây" Background="#EDEDED" 
                              Width="350" Height="45" Padding="2,2,2,2" FontSize="21"/>
                 </Border>
@@ -73,7 +77,7 @@
                         <StackPanel Margin="10,0,5,0">
                             <Border Height="150" Width="200" Margin="0,0,0,0">
                                 <Border.Background>
-                                    <ImageBrush/>
+                                    <ImageBrush ImageSource="{Binding CakeImage, Converter={StaticResource directoryConverter}}"/>
                                 </Border.Background>
                             </Border>
                             <StackPanel Orientation="Horizontal">

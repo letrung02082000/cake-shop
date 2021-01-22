@@ -121,6 +121,7 @@ namespace CakeShopWPF
                 order.OrderStatus = 1;
                 order.ShippingFee = 0;
                 order.TotalPrice = totalPrice;
+                order.IsDirect = 1;
             }
             else if (DeliveryBtn.IsChecked == true)
             {
@@ -149,6 +150,7 @@ namespace CakeShopWPF
                 order.ShippingFee = shippingFee;
                 order.OrderStatus = 0;
                 order.TotalPrice = totalPrice;
+                order.IsDirect = 0;
             }
 
             order.OrderDate = DateTime.Now.ToString();
@@ -167,8 +169,6 @@ namespace CakeShopWPF
                 order.CustomerId = customerId;
             }
 
-            int orderId = DatabaseAccess.SaveOrder(order);
-
             foreach (var cake in Cart.CartList)
             {
                 CakeModel cakeModel = DatabaseAccess.FindCakeById(cake.CakeId);
@@ -181,13 +181,22 @@ namespace CakeShopWPF
                     MessageBox.Show("Không đủ số lượng bánh trong kho");
                     return;
                 }
+
+                DatabaseAccess.UpdateCake(cakeModel);
             }
+
+            int orderId = DatabaseAccess.SaveOrder(order);
 
             foreach (var cake in Cart.CartList)
             {
-                DatabaseAccess.UpdateCake(cake);
                 DatabaseAccess.SaveOrderItem(orderId, cake.CakeId);
             }
+
+            Cart.CartList.Clear();
+            Cart.IsOldCustomer = true;
+            Cart.NewCustomer = null;
+            Cart.OldCustomer = null;
+            Cart.HasData = false;
 
             MessageBox.Show("Tạo đơn hàng thành công");
         }

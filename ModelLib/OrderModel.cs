@@ -15,6 +15,10 @@ namespace ModelLib
         public int TotalPrice { get; set; }
         public string OrderDate { get; set; }
         public string ShippingAddress { get; set; }
+        public int IsDirect { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerTel { get; set; }
         public DateTime OrderDateTime { get; set; }
+        public string OrderStatusStr { get; set; }
     }
 }

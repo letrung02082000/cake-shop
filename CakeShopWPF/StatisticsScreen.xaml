@@ -23,9 +23,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <DataGrid>
-                
-            </DataGrid>
+            <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

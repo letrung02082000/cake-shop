@@ -145,7 +145,7 @@ namespace CakeShopWPF
                 }
 
                 File.Copy(filePath, newFilePath);
-                Product.CakeImage = newFilePath;
+                Product.CakeImage = newFilePath.Split('\\').Last();
                 productImage.Source = new BitmapImage(new Uri(newFilePath));
             }
         }

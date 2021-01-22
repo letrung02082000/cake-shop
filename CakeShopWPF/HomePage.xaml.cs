@@ -89,7 +89,7 @@ namespace CakeShopWPF
 
             if(selectedIndex >= 0)
             {
-                int cakeId = CakeList[selectedIndex].CakeId;
+                int cakeId = CurrentCakeList[selectedIndex].CakeId;
                 DetailProductPage detailProductPage = new DetailProductPage(cakeId);
                 this.NavigationService.Navigate(detailProductPage);
             }
@@ -109,9 +109,9 @@ namespace CakeShopWPF
                 }
             }
 
-            CakeList[index].CartQuantity = 1;
+            CurrentCakeList[index].CartQuantity = 1;
 
-            Cart.CartList.Add(CakeList[index]);
+            Cart.CartList.Add(CurrentCakeList[index]);
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
@@ -159,6 +159,12 @@ namespace CakeShopWPF
             CurrentCakeList = new ObservableCollection<CakeModel>(DatabaseAccess.FindCakeByCategory(categoryId));
             CakeListView.ItemsSource = CurrentCakeList;
             
+        }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchValue = (sender as TextBox).Text;
+            MessageBox.Show(searchValue);
         }
     }
 }
