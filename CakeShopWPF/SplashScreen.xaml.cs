@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ModelLib;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,14 @@ namespace CakeShopWPF
     /// </summary>
     public partial class SplashScreen : Window
     {
+        private Random rsg = new Random();
+        public ObservableCollection<CakeModel> CakeList { get; set; }
         public SplashScreen()
         {
             InitializeComponent();
+            CakeList = new ObservableCollection<CakeModel>(DatabaseAccess.LoadCake());
+            int index = rsg.Next(CakeList.Count);
+            this.DataContext = CakeList[index];
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)

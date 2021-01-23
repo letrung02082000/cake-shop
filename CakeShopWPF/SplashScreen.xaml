@@ -20,16 +20,16 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <Label Margin="10" FontSize="17" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding DesName}"/>
+                <Label Margin="10" FontSize="17" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding CakeName}"/>
             </Grid>
 
             <Grid Grid.Row="1">
-                <Image Source="{Binding DesImage, Converter={StaticResource directoryConverter}}"/>
+                <Image Source="{Binding CakeImage, Converter={StaticResource directoryConverter}}"/>
             </Grid>
 
             <Grid Grid.Row="2">
                 <ScrollViewer Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                    <TextBlock TextAlignment="Center" FontSize="13" TextWrapping="Wrap" Text="{Binding DesDescription}"/>
+                    <TextBlock TextAlignment="Center" FontSize="13" TextWrapping="Wrap" Text="{Binding CakeDesc}"/>
                 </ScrollViewer>
             </Grid>
 
