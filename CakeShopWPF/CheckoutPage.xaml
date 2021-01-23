@@ -19,54 +19,54 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="14*"/>
+            <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="BackBtn" Click="BackBtn_Click">Quay lại</Button>
-            <Button x:Name="ConfirmCheckoutBtn" Click="ConfirmCheckoutBtn_Click">Xác nhận</Button>
-        </StackPanel>
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <Button DockPanel.Dock="Left" x:Name="BackBtn" Margin="25 5 0 5" Background="CornflowerBlue" BorderThickness="0" Click="BackBtn_Click">Quay lại</Button>
+            <Button DockPanel.Dock="Right" x:Name="ConfirmCheckoutBtn" Margin="0 5 25 5" Background="CornflowerBlue" BorderThickness="0" Click="ConfirmCheckoutBtn_Click">Xác nhận</Button>
+        </DockPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="201*"/>
                 <ColumnDefinition Width="199*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" Margin="25">
                 <DockPanel LastChildFill="False">
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                        <Label DockPanel.Dock="Top">Thanh toán trực tiếp</Label>
+                    <StackPanel Margin="0 0 0 15" Orientation="Horizontal" DockPanel.Dock="Top">
+                        <Label FontSize="15" FontWeight="Bold" DockPanel.Dock="Top">Thanh toán trực tiếp</Label>
                         <RadioButton x:Name="DirectBtn" Checked="DirectBtn_Checked"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                        <TextBlock>Tổng thu</TextBlock>
-                        <TextBox x:Name="tbDirectTotalPrice" Width="50" TextChanged="tbDirectTotalPrice_TextChanged"/>
+                    <StackPanel Margin="0 0 0 15" Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" Margin="0 0 15 0">Tổng thu</TextBlock>
+                        <TextBox x:Name="tbDirectTotalPrice" Width="110" TextChanged="tbDirectTotalPrice_TextChanged"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                        <TextBlock>Tiền mặt</TextBlock>
-                        <TextBox Width="50" x:Name="tbCash" TextChanged="tbCash_TextChanged"/>
+                    <StackPanel Margin="0 0 0 15" Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" Margin="0 0 15 0">Tiền mặt</TextBlock>
+                        <TextBox Width="110" x:Name="tbCash" TextChanged="tbCash_TextChanged"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                        <TextBlock>Trả lại</TextBlock>
-                        <TextBox Width="50" x:Name="tbReturnCash" TextChanged="tbReturnCash_TextChanged"/>
+                    <StackPanel Margin="0 0 0 15" Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" Margin="0 0 15 0">Trả lại</TextBlock>
+                        <TextBox Width="125" x:Name="tbReturnCash" TextChanged="tbReturnCash_TextChanged"/>
                     </StackPanel>
                 </DockPanel>
 
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Margin="25">
                 <DockPanel LastChildFill="False">
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                        <Label DockPanel.Dock="Top">Giao hàng tận nơi</Label>
+                    <StackPanel Margin="0 0 0 15"  Orientation="Horizontal" DockPanel.Dock="Top">
+                        <Label DockPanel.Dock="Top" FontSize="15" FontWeight="Bold">Giao hàng tận nơi</Label>
                         <RadioButton x:Name="DeliveryBtn" Checked="DeliveryBtn_Checked"/>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-                        <TextBlock>Địa chỉ</TextBlock>
-                        <TextBox Width="Auto" TextChanged="tbShippingAddress_TextChanged"  x:Name="tbShippingAddress"/>
+                    <StackPanel Margin="0 0 0 15"  Orientation="Vertical" DockPanel.Dock="Top">
+                        <TextBlock FontSize="15" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0 0 15 15">Địa chỉ</TextBlock>
+                        <TextBox Width="Auto" Height="110" Padding="2" TextWrapping="Wrap" BorderThickness="1" BorderBrush="Black" TextChanged="tbShippingAddress_TextChanged"  x:Name="tbShippingAddress"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                        <TextBlock>Phí giao hàng</TextBlock>
+                    <StackPanel Margin="0 0 0 15"  Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock FontSize="15" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0 0 15 0">Phí giao hàng</TextBlock>
                         <TextBox Width="50" x:Name="tbShippingFee" TextChanged="tbShippingFee_TextChanged"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                        <TextBlock>Tổng thu</TextBlock>
+                    <StackPanel Margin="0 0 0 15"  Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock FontSize="15" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0 0 15 0">Tổng thu</TextBlock>
                         <TextBox Width="50" x:Name="tbDeliveryTotalPrice" TextChanged="tbDeliveryTotalPrice_TextChanged"></TextBox>
                     </StackPanel>
 

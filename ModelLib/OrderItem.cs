@@ -12,5 +12,7 @@ namespace ModelLib
         public int CakeId { get; set; }
         public string CakeName { get; set; }
         public string CakeCode { get; set; }
+        public int CartQuantity { get; set; }
+        public string CateName { get; set; }
     }
 }

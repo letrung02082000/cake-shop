@@ -17,47 +17,87 @@
              d:DesignHeight="450" d:DesignWidth="800"
       Title="EditProductPage">
 
+    <Page.Resources>
+        <local:DirectoryConverter x:Key="directoryConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="41*"/>
+            <RowDefinition Height="48*"/>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="355*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" LastChildFill="False">
-            <TextBlock>Cập nhật sản phẩm</TextBlock>
-            <Button x:Name="goBackBtn" Click="goBackBtn_Click">Quay lại</Button>
-            <Button x:Name="confirmUpdateProductBtn" Click="confirmUpdateProductBtn_Click">Xác nhận</Button>
+            <Button x:Name="goBackBtn" Margin="15 0 0 0" Background="CornflowerBlue" BorderThickness="0" DockPanel.Dock="Left" Click="goBackBtn_Click">Quay lại</Button>
+            <Button x:Name="confirmUpdateProductBtn" Margin="0 0 15 0" Background="CornflowerBlue" BorderThickness="0" DockPanel.Dock="Right" Click="confirmUpdateProductBtn_Click">Xác nhận</Button>
         </DockPanel>
 
-        <Grid Grid.Row="1">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock VerticalAlignment="Center" FontSize="25" FontWeight="Bold">Cập nhật sản phẩm</TextBlock>
+        </StackPanel>
+
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120*"/>
-                <ColumnDefinition Width="121*"/>
-                <ColumnDefinition Width="138*"/>
+                <ColumnDefinition Width="253*"/>
+                <ColumnDefinition Width="268*"/>
+                <ColumnDefinition Width="279*"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <TextBox x:Name="txtCakeName" Text="{Binding CakeName}"/>
-                <TextBox x:Name="txtCakeCode" Text="{Binding CakeCode}"/>
-                <TextBlock DockPanel.Dock="Top">Loại sản phẩm cũ</TextBlock>
-                <ComboBox x:Name="cbbCakeCat" SelectionChanged="cbbCakeCat_SelectionChanged">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding CateName}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                        <TextBlock DockPanel.Dock="Top">Loại sản phẩm mới</TextBlock>
-                        <RadioButton x:Name="rbNewCategory" IsChecked="False"/>
-                    </StackPanel>
-                    <TextBox DockPanel.Dock="Top" TextChanged="tbNewCategory_TextChanged" x:Name="tbNewCategory"/>
+                <DockPanel Margin="15">
+                    <TextBlock DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 0 15">Tên sản phẩm</TextBlock>
+                    <TextBox x:Name="txtCakeName" Height="55" BorderThickness="1" BorderBrush="Black" Text="{Binding CakeName}"/>
                 </DockPanel>
-                <TextBox x:Name="txtCakePrice" Text="{Binding CakePrice}"/>
-                <TextBox x:Name="txtCakeDesc" Text="{Binding CakeDesc}"/>
-                <TextBox x:Name="txtCakeImage" Text="{Binding CakeImage}"/>
-                <TextBox x:Name="txtCakeQuantity" Text="{Binding CakeQuantity}"/>
+
+                <DockPanel Margin="15">
+                    <TextBlock DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 0 15">Mã sản phẩm</TextBlock>
+                    <TextBox x:Name="txtCakeCode" Height="35" BorderThickness="1" BorderBrush="Black" Text="{Binding CakeCode}"/>
+                </DockPanel>
+
+                <DockPanel Margin="15">
+                    <TextBlock DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 0 15">Giá bán</TextBlock>
+                    <TextBox x:Name="txtCakePrice" Height="35" BorderThickness="1" BorderBrush="Black" Text="{Binding CakePrice}"/>
+                </DockPanel>
+
+                <DockPanel Margin="15">
+                    <TextBlock DockPanel.Dock="Top" Margin="0 0 0 15" FontSize="15" FontWeight="Bold">Số lượng còn lại</TextBlock>
+                    <TextBox x:Name="txtCakeQuantity" Height="35" BorderThickness="1" BorderBrush="Black" Text="{Binding CakeQuantity}"/>
+                </DockPanel>
             </StackPanel>
+
+            <Grid Grid.Column="1" Margin="25">
+                <StackPanel>
+                    <TextBlock DockPanel.Dock="Top" Margin="0 0 0 15" FontWeight="Bold" FontSize="15">Loại sản phẩm cũ</TextBlock>
+                    <ComboBox Margin="0 0 0 15" x:Name="cbbCakeCat" SelectionChanged="cbbCakeCat_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CateName}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <DockPanel Margin="0 0 0 15">
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0 0 0 15">
+                            <TextBlock Margin="0 0 15 0" FontWeight="Bold" FontSize="15" DockPanel.Dock="Top">Loại sản phẩm mới</TextBlock>
+                            <RadioButton x:Name="rbNewCategory" IsChecked="False"/>
+                        </StackPanel>
+                        <TextBox DockPanel.Dock="Top" Padding="2" TextChanged="tbNewCategory_TextChanged" x:Name="tbNewCategory"/>
+                    </DockPanel>
+
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 0 15">Mô tả</TextBlock>
+                        <TextBox x:Name="txtCakeDesc" Padding="2" Height="150" BorderThickness="1" BorderBrush="Black" Text="{Binding CakeDesc}"/>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="2" Margin="25">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
+                        <TextBlock Margin="0 0 15 0" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" Text="Ảnh sản phẩm"/>
+                        <Button x:Name="addImageBtn" Click="addImageBtn_Click" Background="CornflowerBlue" BorderThickness="0">Thêm ảnh</Button>
+                    </StackPanel>
+                    <Image x:Name="productImage" Source="{Binding CakeImage, Converter={StaticResource directoryConverter}}"/>
+                </StackPanel>
+            </Grid>
         </Grid>
+
     </Grid>
 </Page>

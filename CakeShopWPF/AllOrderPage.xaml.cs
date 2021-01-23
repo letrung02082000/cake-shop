@@ -32,8 +32,16 @@ namespace CakeShopWPF
 
         private void orderListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OrderModel order = orderListView.SelectedItem as OrderModel;
-            this.NavigationService.Navigate(new DetailOrderPage(order));
+            if (orderListView.SelectedIndex >= 0)
+            {
+                OrderModel order = orderListView.SelectedItem as OrderModel;
+                this.NavigationService.Navigate(new DetailOrderPage(order));
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            orderListView.SelectedIndex = -1;
         }
     }
 }

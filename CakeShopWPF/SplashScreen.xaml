@@ -34,12 +34,12 @@
             </Grid>
 
             <Grid Grid.Row="3">
-                <StackPanel HorizontalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center" Margin="0 0 0 5">
                     <StackPanel Orientation="Horizontal">
                         <CheckBox Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked" IsChecked="True"/>
                         <TextBlock Text="Hiện hộp thoại mỗi khi khởi động"/>
                     </StackPanel>
-                    <Button Click="Cancel_Click" Content="Bỏ qua"/>
+                    <Button Background="CornflowerBlue" BorderThickness="0" Click="Cancel_Click" Content="Bỏ qua"/>
                 </StackPanel>
             </Grid>
         </Grid>

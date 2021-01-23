@@ -22,7 +22,7 @@
             <RowDefinition Height="247*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="25">
             <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" />
         </Grid>
         <Grid Grid.Row="1">

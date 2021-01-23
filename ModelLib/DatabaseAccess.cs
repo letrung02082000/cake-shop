@@ -95,7 +95,7 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.Query<OrderModel>($"SELECT orderId, order_cake.customerId, orderStatus, shippingFee, totalPrice, orderDate, shippingAddress, customerName, customerTel  FROM order_cake JOIN customer on order_cake.customerId = customer.customerId", new DynamicParameters());
+                var output = connection.Query<OrderModel>($"SELECT orderId, order_cake.customerId, orderStatus, shippingFee, totalPrice, orderDate, shippingAddress, isDirect, customerName, customerTel  FROM order_cake JOIN customer on order_cake.customerId = customer.customerId", new DynamicParameters());
                 return output.ToList();
             }
         }
@@ -123,16 +123,25 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.Query<OrderItem>($"SELECT order_cake.orderId, order_item.cakeId, cake.cakeName, cake.cakeCode FROM order_item JOIN order_cake ON order_item.cakeId = order_item.cakeId JOIN cake on order_item.cakeId = cake.cakeId WHERE order_cake.orderId = {orderId}");
+                var output = connection.Query<OrderItem>($"SELECT order_cake.orderId, order_item.cakeId, cake.cakeName, cake.cakeCode, order_item.cartQuantity FROM order_item JOIN order_cake ON order_item.orderId = order_cake.orderId JOIN cake on order_item.cakeId = cake.cakeId WHERE order_cake.orderId = {orderId}");
                 return output.ToList();
             }
         }
 
-        public static int SaveOrderItem(int orderId, int cakeId)
+        public static int SaveOrderItem(int orderId, int cakeId, int cartQuantity)
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                int output = connection.ExecuteScalar<int>("INSERT INTO order_item(orderId, cakeId) VALUES(@orderId, @cakeId); SELECT last_insert_rowid()", new { orderId, cakeId});
+                int output = connection.ExecuteScalar<int>("INSERT INTO order_item(orderId, cakeId, cartQuantity) VALUES(@orderId, @cakeId, @cartQuantity); SELECT last_insert_rowid()", new { orderId, cakeId, cartQuantity});
+                return output;
+            }
+        }
+
+        public static int CompleteOrder(int orderId)
+        {
+            using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                int output = connection.ExecuteScalar<int>("UPDATE order_cake SET orderStatus = 1 WHERE orderId = @orderId; SELECT last_insert_rowid()", new { orderId });
                 return output;
             }
         }
@@ -160,7 +169,7 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.Query<TotalPerCategory>($"SELECT cakeCat, cateName,sum(cakePrice) as totalCate FROM order_cake JOIN order_item on order_cake.orderId = order_item.orderId JOIN cake on order_item.cakeId = cake.cakeId JOIN category on cake.cakeCat = category.cateId GROUP BY cakeCat, cateName", new DynamicParameters());
+                var output = connection.Query<TotalPerCategory>($"SELECT category.cateId, category.cateName, sum(order_item.cartQuantity*cake.cakePrice) AS totalCate FROM order_item JOIN order_cake ON order_item.orderId = order_cake.orderId JOIN cake on order_item.cakeId = cake.cakeId JOIN category on cake.cakeCat = category.cateId GROUP BY cateId, cateName", new DynamicParameters());
                 return output.ToList();
             }
         }

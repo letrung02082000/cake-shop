@@ -35,6 +35,35 @@ namespace CakeShopWPF
         {
             OrderStackPanel.DataContext = Order;
             OrderItemListView.ItemsSource = OrderItemList;
+
+            if (Order.IsDirect == 1)
+            {
+                dpShippingAddress.Visibility = Visibility.Hidden;
+                dpShippingFee.Visibility = Visibility.Hidden;
+            }
+
+            if(Order.OrderStatus == 1)
+            {
+                txtStatus.Text = "Đã thanh toán";
+                completeBtn.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                txtStatus.Text = "Chưa thanh toán";
+            }
+        }
+
+        private void goBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
+        private void completeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DatabaseAccess.CompleteOrder(Order.OrderId);
+            completeBtn.Visibility = Visibility.Hidden;
+            txtStatus.Text = "Đã thanh toán";
+            MessageBox.Show("Đã đánh dấu hoàn tất đơn hàng.");
         }
     }
 }

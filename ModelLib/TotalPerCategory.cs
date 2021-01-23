@@ -8,7 +8,7 @@ namespace ModelLib
 {
     public class TotalPerCategory
     {
-        public int CakeCat { get; set; }
+        public int CateId { get; set; }
         public string CateName { get; set; }
         public int TotalCate { get; set; }
     }

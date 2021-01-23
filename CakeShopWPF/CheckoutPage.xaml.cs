@@ -149,7 +149,7 @@ namespace CakeShopWPF
                 order.ShippingAddress = tbShippingAddress.Text;
                 order.ShippingFee = shippingFee;
                 order.OrderStatus = 0;
-                order.TotalPrice = totalPrice;
+                order.TotalPrice = totalPrice+shippingFee;
                 order.IsDirect = 0;
             }
 
@@ -189,7 +189,7 @@ namespace CakeShopWPF
 
             foreach (var cake in Cart.CartList)
             {
-                DatabaseAccess.SaveOrderItem(orderId, cake.CakeId);
+                DatabaseAccess.SaveOrderItem(orderId, cake.CakeId, cake.CartQuantity);
             }
 
             Cart.CartList.Clear();
@@ -197,6 +197,10 @@ namespace CakeShopWPF
             Cart.NewCustomer = null;
             Cart.OldCustomer = null;
             Cart.HasData = false;
+            DirectBtn.IsChecked = true;
+            tbDirectTotalPrice.Text = "";
+            tbDirectTotalPrice.Text = "";
+            tbShippingAddress.Text = "";
 
             MessageBox.Show("Tạo đơn hàng thành công");
         }

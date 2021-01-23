@@ -18,21 +18,65 @@
       Title="DetailOrderPage">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" x:Name="OrderStackPanel" Grid.Column="0">
-            <TextBlock Text="{Binding OrderId}"/>
-            <TextBlock Text="{Binding CustomerName}"/>
-        </StackPanel>
-        <ListView x:Name="OrderItemListView" Grid.Column="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Mã bánh" DisplayMemberBinding="{Binding CakeCode}"/>
-                    <GridViewColumn Header="Tên bánh" DisplayMemberBinding="{Binding CakeName}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="67*"/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False">
+            <Button x:Name="goBackBtn" DockPanel.Dock="Left" Background="CornflowerBlue" BorderThickness="0" Click="goBackBtn_Click">Quay lại</Button>
+            <Button x:Name="completeBtn" DockPanel.Dock="Right" Margin="0 0 15 0" Background="CornflowerBlue" BorderThickness="0" Click="completeBtn_Click">Đánh dấu hoàn tất</Button>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical" x:Name="OrderStackPanel" Grid.Column="0">
+                    <DockPanel Margin="0 15 0 15">
+                        <TextBlock DockPanel.Dock="Left" Margin="0 0 15 0" FontSize="15" FontWeight="Bold">Mã hoá đơn:</TextBlock>
+                        <TextBlock Text="{Binding OrderId}"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 0 0 15">
+                        <TextBlock DockPanel.Dock="Left" Margin="0 0 15 0" FontSize="15" FontWeight="Bold">Mã khách hàng:</TextBlock>
+                        <TextBlock Text="{Binding CustomerId}"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 0 0 15">
+                        <TextBlock DockPanel.Dock="Left" Margin="0 0 15 0" FontSize="15" FontWeight="Bold">Tên khách hàng:</TextBlock>
+                        <TextBlock Text="{Binding CustomerName}"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 0 0 15">
+                        <TextBlock DockPanel.Dock="Left" Margin="0 0 15 0" FontSize="15" FontWeight="Bold">Tổng giá:</TextBlock>
+                        <TextBlock Text="{Binding TotalPrice}"/>
+                        <TextBlock FontWeight="Bold" Text=" VNĐ"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 0 0 15">
+                        <TextBlock DockPanel.Dock="Left" Margin="0 0 15 0" FontSize="15" FontWeight="Bold">Ngày mua:</TextBlock>
+                        <TextBlock Text="{Binding OrderDate}"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 0 0 15">
+                        <TextBlock DockPanel.Dock="Left" Margin="0 0 15 0" FontSize="15" FontWeight="Bold">Trạng thái:</TextBlock>
+                        <TextBlock x:Name="txtStatus"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 0 0 15" x:Name="dpShippingAddress">
+                        <TextBlock DockPanel.Dock="Left" Margin="0 0 15 0" FontSize="15" FontWeight="Bold">Địa chỉ giao hàng:</TextBlock>
+                        <TextBlock x:Name="txtShippingAddress" Text="{Binding ShippingAddress}"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 0 0 15" x:Name="dpShippingFee">
+                        <TextBlock DockPanel.Dock="Left" Margin="0 0 15 0" FontSize="15" FontWeight="Bold">Phí giao hàng:</TextBlock>
+                        <TextBlock x:Name="txtShippingFee" Text="{Binding ShippingFee}"/>
+                    </DockPanel>
+                </StackPanel>
+            </ScrollViewer>
+            <ListView x:Name="OrderItemListView" Grid.Column="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Mã bánh" DisplayMemberBinding="{Binding CakeCode}"/>
+                        <GridViewColumn Header="Tên bánh" DisplayMemberBinding="{Binding CakeName}"/>
+                        <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding CartQuantity}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

@@ -23,60 +23,62 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid>
+        <Grid Grid.Column="0" Margin="25">
             <Grid.RowDefinitions>
-                <RowDefinition Height="16*"/>
-                <RowDefinition Height="29*"/>
+                <RowDefinition Height="251*"/>
+                <RowDefinition Height="149*"/>
             </Grid.RowDefinitions>
-            <DockPanel Grid.Row="0" LastChildFill="False">
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                    <Label>Khách hàng cũ</Label>
+            <DockPanel Grid.Row="0" LastChildFill="True">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0 0 0 15">
+                    <Label FontSize="15" FontWeight="Bold">Khách hàng cũ</Label>
                     <RadioButton x:Name="OldCustomerBtn" Checked="OldCustomerBtn_Checked"/>
                 </StackPanel>
-                <ComboBox SelectionChanged="CustomerComboBox_SelectionChanged" x:Name="CustomerComboBox" Width="Auto" DockPanel.Dock="Top" materialDesign:HintAssist.Hint="Chọn khách hàng">
+                <ComboBox Margin="0 0 0 15" SelectionChanged="CustomerComboBox_SelectionChanged" x:Name="CustomerComboBox" Width="Auto" DockPanel.Dock="Top" materialDesign:HintAssist.Hint="Chọn khách hàng">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding CustomerName}"/>
-                                <TextBlock>-</TextBlock>
+                                <TextBlock Text=" - "/>
                                 <TextBlock Text="{Binding CustomerTel}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <TextBox DockPanel.Dock="Top" Width="Auto" materialDesign:HintAssist.Hint="Tìm kiếm"/>
-                <ListView x:Name="CustomerListView" DockPanel.Dock="Top" SelectionChanged="CustomerListView_SelectionChanged">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding CustomerName}"/>
-                                <TextBlock>-</TextBlock>
-                                <TextBlock Text="{Binding CustomerTel}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ScrollViewer>
+                    <ListView x:Name="CustomerListView" DockPanel.Dock="Top" SelectionChanged="CustomerListView_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="15" Text="{Binding CustomerName}"/>
+                                    <TextBlock FontSize="15" Text=" - "/>
+                                    <TextBlock FontSize="15" Text="{Binding CustomerTel}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
             </DockPanel>
             <DockPanel Grid.Row="1" LastChildFill="False">
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                    <Label>Khách hàng mới</Label>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0 0 0 15">
+                    <Label FontSize="15" FontWeight="Bold">Khách hàng mới</Label>
                     <RadioButton IsChecked="False" x:Name="NewCustomerBtn" Checked="NewCustomerBtn_Checked"/>
                 </StackPanel>
-                <TextBox TextChanged="tbCustomerName_TextChanged" DockPanel.Dock="Top" x:Name="tbCustomerName" materialDesign:HintAssist.Hint="Tên khách hàng"/>
-                <TextBox TextChanged="tbCustomerTel_TextChanged" DockPanel.Dock="Top" x:Name="tbCustomerTel" materialDesign:HintAssist.Hint="Số điện thoại"/>
+                <TextBox FontSize="15" Padding="2" Height="35" Margin="0 0 0 15" TextChanged="tbCustomerName_TextChanged" DockPanel.Dock="Top" x:Name="tbCustomerName" materialDesign:HintAssist.Hint="Tên khách hàng"/>
+                <TextBox FontSize="15" Padding="2" Height="35" TextChanged="tbCustomerTel_TextChanged" DockPanel.Dock="Top" x:Name="tbCustomerTel" materialDesign:HintAssist.Hint="Số điện thoại"/>
             </DockPanel>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Margin="25">
             <Grid.RowDefinitions>
-                <RowDefinition Height="12*"/>
-                <RowDefinition Height="187*"/>
-                <RowDefinition Height="26*"/>
+                <RowDefinition Height="37*"/>
+                <RowDefinition Height="124*"/>
+                <RowDefinition Height="207*"/>
+                <RowDefinition Height="32*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0">Sản phẩm</Label>
-            <DockPanel  x:Name="txtNotification" Grid.Row="1" Visibility="Hidden">
-                <TextBlock DockPanel.Dock="Top" Grid.Row="1">Không có sản phẩm</TextBlock>
+            <Label Grid.Row="0" FontSize="15" FontWeight="Bold">Sản phẩm</Label>
+            <DockPanel x:Name="txtNotification" Grid.Row="1" Visibility="Hidden" Grid.RowSpan="2">
+                <TextBlock HorizontalAlignment="Center" FontSize="25" FontWeight="Bold" DockPanel.Dock="Top" Grid.Row="1">Không có sản phẩm trong giỏ hàng!</TextBlock>
             </DockPanel>
-            <ListView Grid.Row="1" x:Name="CartListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView Grid.Row="1" x:Name="CartListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Vertical"/>
@@ -84,24 +86,24 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding CakeName}"/>
-                            <Button x:Name="DecreaseQuantityBtn" Click="DecreaseQuantityBtn_Click">
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
+                            <TextBlock Margin="0 0 15 0" FontSize="15" TextWrapping="Wrap" Text="{Binding CakeName}"/>
+                            <Button Background="CornflowerBlue" materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderThickness="0" Foreground="White" HorizontalAlignment="Right" x:Name="DecreaseQuantityBtn" Click="DecreaseQuantityBtn_Click">
                                 <materialDesign:PackIcon Kind="Remove"/>
                             </Button>
-                            <TextBox Width="100" x:Name="tbQuantity" Text="{Binding CartQuantity}" TextChanged="tbQuantity_TextChanged"/>
-                            <Button x:Name="IncreaseQuantityBtn" Click="IncreaseQuantityBtn_Click">
+                            <TextBox HorizontalContentAlignment="Center" Margin="5 0 5 0" Width="50" x:Name="tbQuantity" Text="{Binding CartQuantity}" TextChanged="tbQuantity_TextChanged"/>
+                            <Button materialDesign:ShadowAssist.ShadowDepth="Depth0" x:Name="IncreaseQuantityBtn" Background="CornflowerBlue" BorderThickness="0" Click="IncreaseQuantityBtn_Click">
                                 <materialDesign:PackIcon Kind="Add"/>
                             </Button>
-                            <Button x:Name="deleteBtn" Click="deleteBtn_Click">
+                            <Button Margin="25 0 0 0" materialDesign:ShadowAssist.ShadowDepth="Depth0" x:Name="deleteBtn" Background="CornflowerBlue" BorderThickness="0" Foreground="White" Click="deleteBtn_Click">
                                 <materialDesign:PackIcon Kind="Delete"/>
                             </Button>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackPanel Grid.Row="2">
-                <Button x:Name="CheckoutBtn" Click="CheckoutBtn_Click">Thanh toán</Button>
+            <StackPanel Grid.Row="3">
+                <Button x:Name="CheckoutBtn" Background="CornflowerBlue" BorderThickness="0" Click="CheckoutBtn_Click">Thanh toán</Button>
             </StackPanel>
         </Grid>
 
