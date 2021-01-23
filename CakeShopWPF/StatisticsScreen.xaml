@@ -34,7 +34,7 @@
                 <lvc:PieChart x:Name="pieChart" Height="250"></lvc:PieChart>
             </Grid>
             <Grid x:Name="chartGrid" Grid.Column="1">
-                <lvc:CartesianChart x:Name="PerMonthChart" LegendLocation="Bottom">
+                <lvc:CartesianChart x:Name="PerMonthChart" LegendLocation="Bottom" Series="{Binding SeriesCollection}">
                     <lvc:CartesianChart.AxisX>
                         <lvc:AxesCollection>
                             <lvc:Axis Labels="{Binding Labels}">

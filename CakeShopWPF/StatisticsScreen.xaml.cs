@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
+using LiveCharts.Defaults;
 
 namespace CakeShopWPF
 {
@@ -28,7 +29,7 @@ namespace CakeShopWPF
         public ObservableCollection<OrderModel> OrderList { get; set; }
         public ObservableCollection<TotalPerCategory> TotalPerCategoryList { get; set; }
         public string[] Labels { get; set; }
-        public SeriesCollection SeriesCollection { get; set; } = new SeriesCollection();
+        public SeriesCollection SeriesCollection { get; set; }
         public StatisticsScreen()
         {
             InitializeComponent();
@@ -59,7 +60,6 @@ namespace CakeShopWPF
             int month10 = 0;
             int month11 = 0;
             int month12 = 0;
-
 
             foreach (var order in OrderList)
             {
@@ -126,14 +126,18 @@ namespace CakeShopWPF
                 }
             }
 
-            ColumnSeries columnSeries = new ColumnSeries
+            SeriesCollection = new SeriesCollection
             {
-                Title = "Doanh thu theo tháng",
-                Values = new ChartValues<int> { month1, month2, month3, month4, month5, month6, month7, month8, month9, month10, month11, month12 }
+                new ColumnSeries
+                {
+                    Title = "Doanh thu theo tháng",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(month1),new ObservableValue(month2),new ObservableValue(month3),new ObservableValue(month4),new ObservableValue(month5),new ObservableValue(month6),new ObservableValue(month7),new ObservableValue(month8),new ObservableValue(month9),new ObservableValue(month10), new ObservableValue(month11),new ObservableValue(month12)},
+                    DataLabels = true
+                }
             };
 
-             Labels = new[]
-            {
+            Labels = new[]
+{
                 "Tháng 1",
                 "Tháng 2",
                 "Tháng 3",
@@ -148,11 +152,9 @@ namespace CakeShopWPF
                 "Tháng 12",
             };
 
+            this.DataContext = this;
 
-            PerMonthChart.Series.Add(columnSeries);
-            chartGrid.DataContext = Labels;
-
-            foreach(var total in TotalPerCategoryList)
+            foreach (var total in TotalPerCategoryList)
             {
                 PieSeries pieSeries = new PieSeries
                 {

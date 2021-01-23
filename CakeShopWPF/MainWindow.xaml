@@ -69,7 +69,7 @@
                             Click="AddProduct_Click"
                             >
                         <StackPanel Orientation="Horizontal" Width="184" Height="60">
-                            <materialDesign:PackIcon Kind="PeopleAdd" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <materialDesign:PackIcon Kind="PlaylistAdd" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                             <TextBlock Text="Thêm sản phẩm" FontSize="17" VerticalAlignment="Center" Margin="5 0"/>
                         </StackPanel>
                     </Button>
@@ -84,7 +84,7 @@
                             Click="CreateOrder_Click"
                             >
                         <StackPanel Orientation="Horizontal" Height="58" Width="184">
-                            <materialDesign:PackIcon Kind="AddLocation" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <materialDesign:PackIcon Kind="Cart" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                             <TextBlock Text="Tạo đơn hàng" FontSize="17" VerticalAlignment="Center" Margin="5 0"/>
                         </StackPanel>
                     </Button>
@@ -98,7 +98,7 @@
                             Name="Statistics"
                             Click="Statistics_Click">
                         <StackPanel Orientation="Horizontal" Height="57" Width="184">
-                            <materialDesign:PackIcon Kind="AddThick" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <materialDesign:PackIcon Kind="Database" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                             <TextBlock Text="Thống kê" FontSize="17" VerticalAlignment="Center" Margin="5 0"/>
                         </StackPanel>
                     </Button>

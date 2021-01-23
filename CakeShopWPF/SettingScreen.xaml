@@ -16,14 +16,14 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock>Item per page</TextBlock>
-                <TextBox x:Name="tbRowPerPage" Width="50"/>
-                <Button x:Name="confirmRowBtn" Content="OK" Click="confirmRowBtn_Click"/>
+        <StackPanel Orientation="Vertical" Margin="25">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
+                <TextBlock VerticalAlignment="Center" FontSize="15" FontWeight="Bold">Số sản phẩm hiển thị trên mỗi trang</TextBlock>
+                <TextBox x:Name="tbRowPerPage" Width="50" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" Margin="15 0 15 0" BorderThickness="1" BorderBrush="Black"/>
+                <Button x:Name="confirmRowBtn" Content="OK" Background="CornflowerBlue" BorderThickness="0" Click="confirmRowBtn_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock>Hiển thị thông tin ngẫu nhiên khi khởi động</TextBlock>
+                <TextBlock FontSize="15" FontWeight="Bold" Margin="0 0 15 0">Hiển thị thông tin ngẫu nhiên khi khởi động</TextBlock>
                 <CheckBox x:Name="cbSplashScreen" Checked="cbSplashScreen_Checked" Unchecked="cbSplashScreen_Unchecked"/>
             </StackPanel>
         </StackPanel>
