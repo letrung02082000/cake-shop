@@ -27,7 +27,7 @@ namespace ModelLib
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = connection.QuerySingle<CakeModel>($"Select cakeId, cakeCode, cakeName, cakeName2, cakeCat, cakePrice, cakeDesc, cakeImage, cakeQuantity, cateName from cake JOIN category on cake.cakeCat = category.cateId where cakeId = {cakeId}");
+                var output = connection.QuerySingle<CakeModel>($"Select cakeId, cakeCode, cakeName, cakeName2, cakeCat, cakePrice, cakeDesc, cakeImage, cakeQuantity, cateName from cake JOIN category on cake.cakeCat = category.cateId where cakeId = {cakeId}", new DynamicParameters());
                 return output;
             }
         }

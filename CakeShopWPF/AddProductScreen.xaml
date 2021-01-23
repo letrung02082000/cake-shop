@@ -15,44 +15,44 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              Loaded="AddProductScreen_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="AliceBlue">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="68*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="13*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <StackPanel>
-                <Label>Thêm sản phẩm mới</Label>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label FontSize="30" FontWeight="Bold">Thêm sản phẩm mới</Label>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="241*"/>
                 <ColumnDefinition Width="321*"/>
                 <ColumnDefinition Width="238*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Vertical">
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Tên sản phẩm</TextBlock>
-                    <TextBox x:Name="tbName"/>
+                <DockPanel Margin="5">
+                    <TextBlock DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 0 10">Tên sản phẩm</TextBlock>
+                    <TextBox FontSize="15" Padding="2" x:Name="tbName" BorderThickness="1" BorderBrush="Black" Background="{x:Null}" Height="110"/>
                 </DockPanel>
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Mã sản phẩm</TextBlock>
-                    <TextBox x:Name="tbCode"/>
+                <DockPanel Margin="5">
+                    <TextBlock DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 0 10">Mã sản phẩm</TextBlock>
+                    <TextBox FontSize="15" Padding="2" x:Name="tbCode" BorderThickness="1" BorderBrush="Black" Background="{x:Null}" Height="55"/>
                 </DockPanel>
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Giá sản phẩm</TextBlock>
-                    <TextBox x:Name="tbPrice"/>
+                <DockPanel Margin="5">
+                    <TextBlock DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 0 10">Giá sản phẩm</TextBlock>
+                    <TextBox FontSize="15" Padding="2" x:Name="tbPrice" BorderThickness="1" BorderBrush="Black" Background="{x:Null}" Height="55"/>
                 </DockPanel>
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Mô tả</TextBlock>
-                    <TextBox x:Name="tbDesc"/>
+                <DockPanel Margin="5">
+                    <TextBlock DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 0 10">Mô tả</TextBlock>
+                    <TextBox FontSize="15" Padding="2" x:Name="tbDesc" BorderThickness="1" BorderBrush="Black" Background="{x:Null}" Height="150"/>
                 </DockPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="1">
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Loại sản phẩm cũ</TextBlock>
-                    <ComboBox x:Name="cbbCategory" SelectionChanged="cbbCategory_SelectionChanged">
+                <DockPanel Margin="25 5 25 5">
+                    <TextBlock DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 0 10">Loại sản phẩm cũ</TextBlock>
+                    <ComboBox x:Name="cbbCategory" SelectionChanged="cbbCategory_SelectionChanged" BorderThickness="1" BorderBrush="Black" Height="35">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding CateName}"/>
@@ -60,30 +60,30 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </DockPanel>
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                        <TextBlock DockPanel.Dock="Top">Loại sản phẩm mới</TextBlock>
-                        <RadioButton x:Name="rbNewCategory" IsChecked="False"/>
+                <DockPanel Margin="25 5 25 5">
+                    <StackPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock VerticalAlignment="Center" DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 10 0">Loại sản phẩm mới</TextBlock>
+                        <RadioButton VerticalAlignment="Center" x:Name="rbNewCategory" IsChecked="False"/>
                     </StackPanel>
-                    <TextBox DockPanel.Dock="Top" TextChanged="tbNewCategory_TextChanged" x:Name="tbNewCategory"/>
+                    <TextBox Height="55" BorderThickness="1" BorderBrush="Black" Padding="2" FontSize="15" DockPanel.Dock="Top" TextChanged="tbNewCategory_TextChanged" x:Name="tbNewCategory"/>
                 </DockPanel>
-                <DockPanel>
-                    <StackPanel  DockPanel.Dock="Top" Orientation="Horizontal">
-                        <TextBlock>Ảnh sản phẩm</TextBlock>
-                        <Button x:Name="addImageBtn" Click="addImageBtn_Click">Thêm</Button>
+                <DockPanel Margin="25 5 25 5" VerticalAlignment="Center">
+                    <StackPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Margin="0 0 10 0">Ảnh sản phẩm</TextBlock>
+                        <Button x:Name="addImageBtn" Click="addImageBtn_Click" BorderThickness="0" Background="CornflowerBlue" materialDesign:ShadowAssist.ShadowDepth="Depth0">Thêm ảnh</Button>
                     </StackPanel>
-                    
-                    <Image x:Name="productImage"/>
+
+                    <Image x:Name="productImage" Margin="10"/>
                 </DockPanel>
             </StackPanel>
             <StackPanel Grid.Column="2">
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top">Số lượng còn lại</TextBlock>
-                    <TextBox x:Name="tbQuantity"/>
+                <DockPanel Margin="5">
+                    <TextBlock DockPanel.Dock="Top" FontSize="15" FontWeight="Bold" Margin="0 0 0 10">Số lượng còn lại</TextBlock>
+                    <TextBox x:Name="tbQuantity" BorderBrush="Black" BorderThickness="1" Height="35" Padding="2"/>
                 </DockPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Margin="10" x:Name="addProductBtn" Click="addProductBtn_Click">Thêm</Button>
-                    <Button>Huỷ bỏ</Button>
+                    <Button Margin="10" x:Name="addProductBtn" materialDesign:ShadowAssist.ShadowDepth="Depth0" Click="addProductBtn_Click" BorderThickness="0" Background="CornflowerBlue">Thêm</Button>
+                    <Button BorderThickness="0" Background="CornflowerBlue" materialDesign:ShadowAssist.ShadowDepth="Depth0">Huỷ bỏ</Button>
                 </StackPanel>
             </StackPanel>
         </Grid>

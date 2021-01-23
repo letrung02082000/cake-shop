@@ -107,7 +107,7 @@ namespace CakeShopWPF
 
             if(selectedIndex >= 0)
             {
-                int cakeId = CurrentCakeList[selectedIndex].CakeId;
+                int cakeId = DisplayCakeList[selectedIndex].CakeId;
                 DetailProductPage detailProductPage = new DetailProductPage(cakeId);
                 this.NavigationService.Navigate(detailProductPage);
             }
@@ -127,9 +127,9 @@ namespace CakeShopWPF
                 }
             }
 
-            CurrentCakeList[index].CartQuantity = 1;
+            DisplayCakeList[index].CartQuantity = 1;
 
-            Cart.CartList.Add(CurrentCakeList[index]);
+            Cart.CartList.Add(DisplayCakeList[index]);
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
